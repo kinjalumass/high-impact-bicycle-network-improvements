@@ -1,0 +1,161 @@
+project:
+  name: "Identifying High-Impact Bicycle Network Improvements"
+  course: "COMPSCI 683"
+
+reproducibility:
+  random_seed: 683
+
+study_area:
+  name: "Greater Boston"
+  bcu_region: "greater_boston"
+  municipalities:
+    - Boston
+    - Cambridge
+    - Somerville
+    - Brookline
+
+network:
+  source: "OpenStreetMap"
+  graph_type: "directed_multigraph"
+  lts_source: "BCU/StressMap LTS pipeline"
+  edge_length_field: "length"
+  edge_cost_field: "cost"
+  simplified_lts_field: "max_lts"
+
+  cost_model:
+    formula: "edge_length * rider_profile_lts_weight"
+
+demand:
+  source: "BCU OD generation pipeline"
+  scenario_id: 1
+  fixed_baseline_sample: true
+
+  total_modeled_trips: 50000
+
+  categories:
+    school: 20000
+    office: 20000
+    healthcare: 3000
+    transit: 2000
+    greenspace: 2000
+    store: 3000
+
+rider_profiles:
+
+  child:
+    inherited_scenario_id: 1
+    description: "Child / highly stress-sensitive baseline"
+    lts_weights:
+      1: 1.0
+      2: 1.5
+      3: 3.0
+      4: 6.0
+
+  low_confidence_adult:
+    inherited_scenario_id: 6
+    description: "Low-confidence adult baseline"
+    lts_weights:
+      1: 1.0
+      2: 1.6
+      3: 3.0
+      4: 6.0
+
+  typical_adult:
+    inherited_scenario_id: 11
+    description: "Typical adult baseline"
+    lts_weights:
+      1: 1.0
+      2: 1.3
+      3: 2.2
+      4: 4.0
+
+  experienced_adult:
+    inherited_scenario_id: 16
+    description: "Experienced / traffic-tolerant adult baseline"
+    lts_weights:
+      1: 1.0
+      2: 1.1
+      3: 1.5
+      4: 2.75
+
+routing:
+  algorithms:
+    - ucs
+    - astar
+
+  baseline_algorithm: "ucs"
+
+  preserve_per_od_results: true
+
+  per_od_output_fields:
+    - origin_node
+    - destination_node
+    - destination_category
+    - demand
+    - rider_profile
+    - route_cost
+    - route_distance
+    - route_edge_count
+
+  benchmark_metrics:
+    - runtime_seconds
+    - nodes_expanded
+    - route_cost
+    - route_distance
+
+candidate_generation:
+  maximum_candidates: 20
+
+  evidence:
+    - modeled_demand
+    - high_lts_usage
+    - potential_stress_benefit
+    - low_stress_network_connectivity
+
+  required_output_fields:
+    - candidate_id
+    - location
+    - length
+    - current_lts
+    - modeled_demand
+    - preliminary_benefit
+    - selection_reason
+
+intervention_evaluation:
+  maximum_full_simulations: 10
+
+  # The approved proposal specifies lowering LTS for simulated
+  # improvements but does not itself fix one universal target LTS.
+  # We will define and document the intervention rule before Stage E.
+  target_lts: null
+
+  reroute_after_intervention: true
+
+  primary_metric:
+    name: "demand_weighted_route_cost_reduction"
+    higher_is_better: true
+
+  secondary_metrics:
+    - od_pairs_improved
+    - mean_route_cost_reduction
+    - physical_distance_change
+    - benefit_by_destination_category
+    - benefit_by_rider_profile
+
+optimization:
+  method: "greedy"
+  objective: "maximize_demand_weighted_route_cost_reduction"
+
+robustness:
+  alternative_rider_weights: true
+  second_fixed_od_sample: true
+  evaluate_ranking_stability: true
+
+outputs:
+  baseline_directory: "results/baseline"
+  routing_directory: "results/routing"
+  candidate_directory: "results/candidates"
+  intervention_directory: "results/interventions"
+  optimization_directory: "results/optimization"
+  robustness_directory: "results/robustness"
+  figure_directory: "results/figures"

@@ -5,9 +5,9 @@ requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bcu-graph-analysis"
+name = "high-impact-bicycle-network-improvements"
 version = "1.0"
-description = "Analysis of bicycle connectivity and Level of Traffic Stress (LTS) for the Greater Boston area, built by the DS4CG Boston Cyclists Union Team."
+description = "COMPSCI 683 project evaluating high-impact bicycle network improvements using stress-aware routing and demand-weighted intervention analysis."
 readme = "README.md"
 
 # What version of python does your library work with?
