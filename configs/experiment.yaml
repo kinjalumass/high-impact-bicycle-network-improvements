@@ -133,7 +133,7 @@ intervention_evaluation:
   # The approved proposal specifies lowering LTS for simulated
   # improvements but does not itself fix one universal target LTS.
   # We will define and document the intervention rule before Stage E.
-  target_lts: null
+  target_lts: 2
 
   reroute_after_intervention: true
 
