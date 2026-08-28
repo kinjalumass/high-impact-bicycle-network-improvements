@@ -1,0 +1,8 @@
+origin_node,destination_node,category,demand,astar,ucs
+10039644934,7771798240,home_office,1,False,False
+11887690047,1079875144,home_office,2,False,False
+13752095227,7645031441,home_office,1,False,False
+61317416,542889528,home_office,1,False,False
+6869611580,12340393071,home_office,1,False,False
+6881955532,12172310368,home_healthcare,1,False,False
+7717968553,6482887972,home_office,1,False,False
