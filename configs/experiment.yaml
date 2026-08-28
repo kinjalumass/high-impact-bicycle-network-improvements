@@ -152,6 +152,22 @@ optimization:
   method: "greedy"
   objective: "maximize_demand_weighted_route_cost_reduction"
 
+  # No monetary project-cost model is available, so optimization uses
+  # a transparent project-count constraint rather than treating length
+  # as a proxy for construction cost.
+  constraint_type: "maximum_project_count"
+  maximum_projects: 5
+
+  candidate_pool: "top_10_full_simulations"
+  marginal_evaluation: "full_rerouting_after_each_candidate_addition"
+  profile_aggregation: "mean_across_four_rider_profiles"
+
+  report_cumulative_length: true
+
+  tie_breakers:
+    - "higher_mean_improved_demand"
+    - "shorter_cumulative_length_m"
+
 robustness:
   alternative_rider_weights: true
   second_fixed_od_sample: true

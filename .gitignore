@@ -33,3 +33,6 @@ results/figures/
 # OS
 .DS_Store
 Thumbs.db
+
+# Cluster-local intervention artifact manifest
+results/interventions/intervention_output_manifest.csv
