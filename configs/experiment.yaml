@@ -105,6 +105,12 @@ routing:
 
 candidate_generation:
   maximum_candidates: 20
+  eligible_lts:
+    - 3
+    - 4
+  connectivity_reserve: 5
+  require_homogeneous_high_stress_segment: true
+  selection_strategy: "benefit screening with low-stress connectivity reserve"
 
   evidence:
     - modeled_demand
@@ -115,7 +121,7 @@ candidate_generation:
   required_output_fields:
     - candidate_id
     - location
-    - length
+    - length_m
     - current_lts
     - modeled_demand
     - preliminary_benefit
