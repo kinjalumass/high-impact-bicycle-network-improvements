@@ -1,0 +1,396 @@
+# This is a configuration file to evaluate conditions based on OSM tags 
+# and define values to be used in LTS calculations. 
+# 
+# Each section has a prefix (e.g. 'parking') that identies which function
+# in lts_functions.py reads that condition. Each condition has a 'condition'
+# value that filters the ways. Inside the `` is the OSM tag key and it has
+# an evaluation of what tag values it is filtering for.
+# 
+# If the tag value includes [], that is a list of variations of the tag key
+# that will be evaluated. Possible values are [both,left,right].
+
+
+## Parking - parking_present()
+parking1:
+  condition: (`parking:[both,left,right]` == 'no')
+  parking: 'no'
+  rule_message: OSM
+parking2:
+  condition: (`parking:[both,left,right]` == 'lane')
+  parking: 'yes'
+  rule_message: OSM
+parking3:
+  condition: (`parking:[both,left,right]` == 'street_side')
+  parking: 'yes'
+  rule_message: OSM
+parking4:
+  condition: (`parking:[both,left,right]` == 'separate')
+  parking: 'yes'
+  rule_message: OSM mapped
+parking5:
+  condition: (`parking:[both,left,right]:orientation` == 'parallel')
+  parking: 'yes'
+  rule_message: OSM
+parking6:
+  condition: (`parking:condition:[both,left,right]` == 'no_parking')
+  parking: 'no'
+  rule_message: OSM
+parking7:
+  condition: (`parking:condition:[both,left,right]` == 'no_stopping')
+  parking: 'no'
+  rule_message: OSM
+parking8:
+  condition: (`parking:lane:[both,left,right]` == 'no')
+  parking: 'no'
+  rule_message: OSM
+parking9:
+  condition: (`parking:lane:[both,left,right]` == 'no_stopping')
+  parking: 'no'
+  rule_message: OSM
+parking10:
+  condition: (`parking:lane:[both,left,right]` == 'parallel')
+  parking: 'yes'
+  rule_message: OSM
+parking11:
+  condition: (`parking:condition:[both,left,right]` == 'ticket;residents')
+  parking: 'yes'
+  rule_message: OSM
+
+## Prevailing Speed (mph) - get_max_speed()
+# Assumed speeds are worst in Cambridge - FIXME use larger region
+speed1:
+  condition: (`highway` == 'primary')
+  speed: 35
+  rule_message: Assumed
+speed2:
+  condition: (`highway` == 'primary_link')
+  speed: 35
+  rule_message: Assumed
+speed3:
+  condition: (`highway` == 'trunk')
+  speed: 50
+  rule_message: Assumed
+speed4:
+  condition: (`highway` == 'trunk_link')
+  speed: 50
+  rule_message: Assumed
+speed5:
+  condition: (`highway` == 'secondary')
+  speed: 30
+  rule_message: Assumed
+speed6:
+  condition: (`highway` == 'residential')
+  speed: 25
+  rule_message: Assumed
+speed7:
+  condition: (`highway` == 'footway')
+  speed: 15
+  rule_message: Assumed
+speed8:
+  condition: (`highway` == 'unclassified')
+  speed: 40
+  rule_message: Assumed
+speed9:
+  condition: (`highway` == 'service')
+  speed: 30
+  rule_message: Assumed
+speed10:
+  condition: (`highway` == 'tertiary')
+  speed: 25
+  rule_message: Assumed
+speed11:
+  condition: (`highway` == 'tertiary_link')
+  speed: 25
+  rule_message: Assumed
+speed12:
+  condition: (`highway` == 'living_street')
+  speed: 20
+  rule_message: Assumed
+
+## Centerlines - get_centerlines()
+# Should this be combined with speed assumptions?
+centerline1:
+  condition: (`lane_markings` == 'yes')
+  centerline: 'yes'
+  rule_message: OSM
+centerline2:
+  condition: (`lane_markings` == 'no')
+  centerline: 'no'
+  rule_message: OSM
+centerline3:
+  condition: (`highway` == 'primary')
+  centerline: 'yes'
+  rule_message: Assumed
+centerline4:
+  condition: (`highway` == 'primary_link')
+  centerline: 'yes'
+  rule_message: Assumed
+centerline5:
+  condition: (`highway` == 'trunk')
+  centerline: 'yes'
+  rule_message: Assumed
+centerline6:
+  condition: (`highway` == 'trunk_link')
+  centerline: 'yes'
+  rule_message: Assumed
+centerline7:
+  condition: (`highway` == 'secondary')
+  centerline: 'yes'
+  rule_message: Assumed
+centerline8:
+  condition: (`highway` == 'residential')
+  centerline: 'no'
+  rule_message: Assumed
+centerline9:
+  condition: (`highway` == 'footway')
+  centerline: 'no'
+  rule_message: Assumed
+centerline10:
+  condition: (`highway` == 'unclassified')
+  centerline: 'no'
+  rule_message: Assumed
+centerline11:
+  condition: (`highway` == 'service')
+  centerline: 'no'
+  rule_message: Assumed
+centerline12:
+  condition: (`highway` == 'tertiary')
+  centerline: 'no'
+  rule_message: Assumed
+centerline13:
+  condition: (`highway` == 'tertiary_link')
+  centerline: 'no'
+  rule_message: Assumed
+centerline14:
+  condition: (`highway` == 'living_street')
+  centerline: 'no'
+  rule_message: Assumed
+centerline15:
+  condition: (`highway` == 'cycleway')
+  centerline: 'no'
+  rule_message: Assumed
+
+## Average Daily Traffic - get_adt()
+# Assumptions are based on an email for Prof. Furth
+
+# Major roads
+ADT00:
+  condition: (`lane_count` >= 3)
+  ADT: 8001
+  rule_message: Assumed
+ADT01:
+  condition: (`highway` == 'trunk') | (`highway` == 'trunk_link')
+  ADT: 8001
+  rule_message: Assumed
+ADT02:
+  condition: (`highway` == 'primary') | (`highway` == 'primary_link')
+  ADT: 3001
+  rule_message: Assumed
+ADT03:
+  condition: (`lane_count` >= 2) & (`oneway` == True) 
+  ADT: 3001
+  rule_message: Assumed
+
+# Minimal traffic
+ADT10:
+  condition: (`highway` == 'footway')
+  ADT: 10
+  rule_message: Assumed
+ADT11:
+  condition: (`highway` == 'service')
+  ADT: 100
+  rule_message: Assumed
+ADT12:
+  condition: (`highway` == 'cycleway')
+  ADT: 10
+  rule_message: Assumed
+
+# Residential
+ADT20:
+  condition: (`highway` == 'residential') & (`street_narrow_wide` == 'narrow')
+  ADT: 601
+  rule_message: Assumed
+ADT21:
+  condition: (`highway` == 'residential') & (`street_narrow_wide` == 'wide')
+  ADT: 1001
+  rule_message: Assumed
+ADT22: # skinny 2-way
+  condition: (`highway` == 'residential') & (`lane_count` == 1)
+  ADT: 599
+  rule_message: Assumed
+ADT23:
+  condition: (`highway` == 'residential') & (`lane_count` >= 2) & (`centerline` == 'no')
+  ADT: 1501
+  rule_message: Assumed
+ADT24:
+  condition: (`highway` == 'residential') & (`lane_count` >= 2) & (`centerline` == 'yes')
+  ADT: 2501
+  rule_message: Assumed
+
+ADT29: # catchall
+  condition: (`highway` == 'residential')
+  ADT: 1001
+  rule_message: Assumed
+
+# Secondary
+ADT30:
+  condition: (`highway` == 'secondary') & (`street_narrow_wide` == 'narrow')
+  ADT: 1001
+  rule_message: Assumed
+ADT31:
+  condition: (`highway` == 'secondary') & (`street_narrow_wide` == 'wide')
+  ADT: 1501
+  rule_message: Assumed
+ADT32: # skinny 2-way
+  condition: (`highway` == 'secondary') & (`lane_count` == 1)
+  ADT: 1501
+  rule_message: Assumed
+ADT33:
+  condition: (`highway` == 'secondary') & (`lane_count` >= 2)
+  ADT: 3001
+  rule_message: Assumed
+
+ADT39: # catchall
+  condition: (`highway` == 'secondary')
+  ADT: 3001
+  rule_message: Assumed
+
+# Tertiary
+ADT40:
+  condition: ((`highway` == 'tertiary') | (`highway` == 'tertiary_link')) & (`street_narrow_wide` == 'narrow')
+  ADT: 1001
+  rule_message: Assumed
+ADT41:
+  condition: ((`highway` == 'tertiary') | (`highway` == 'tertiary_link')) & (`street_narrow_wide` == 'wide')
+  ADT: 1501
+  rule_message: Assumed
+ADT42: # skinny 2-way
+  condition: ((`highway` == 'tertiary') | (`highway` == 'tertiary_link')) & (`lane_count` == 1)
+  ADT: 1501
+  rule_message: Assumed
+ADT43:
+  condition: ((`highway` == 'tertiary') | (`highway` == 'tertiary_link')) & (`lane_count` >= 2)
+  ADT: 3001
+  rule_message: Assumed
+
+ADT49: # catchall
+  condition: ((`highway` == 'tertiary') | (`highway` == 'tertiary_link'))
+  ADT: 3001
+  rule_message: Assumed
+
+# Other
+ADT50:
+  condition: (`lane_count` >= 2) & (`centerline` == 'yes')
+  ADT: 3001
+  rule_message: Assumed
+ADT51:
+  condition: (`lane_count` >= 2) & (`centerline` == 'no')
+  ADT: 3001
+  rule_message: Assumed
+ADT52:
+  condition: (`lane_count` == 1) & (`street_narrow_wide` == 'narrow')
+  ADT: 1001
+  rule_message: Assumed
+ADT53:
+  condition: (`lane_count` == 1) & (`street_narrow_wide` == 'wide')
+  ADT: 1501
+  rule_message: Assumed
+
+## Zoom
+zoom01:
+  condition: (`cycleway:right` == 'separate')
+  zoom: 15
+  rule_message: _
+zoom02:
+  condition: (`cycleway:left` == 'separate')
+  zoom: 15
+  rule_message: _
+zoom03:
+  condition: (`cycleway:both` == 'separate')
+  zoom: 15
+  rule_message: _
+zoom04:
+  condition: (`cycleway` == 'separate')
+  zoom: 15
+  rule_message: _
+zoom05:
+  condition: (`bicycle` == 'designated')
+  zoom: 11
+  rule_message: _
+
+zoom10:
+  condition: (`highway` == 'primary') & (`LTS` > 3)
+  zoom: 13
+  rule_message: _
+zoom11:
+  condition: (`highway` == 'primary')
+  zoom: 11
+  rule_message: _
+zoom12:
+  condition: (`highway` == 'primary_link')
+  zoom: 13
+  rule_message: _
+
+zoom13:
+  condition: (`highway` == 'trunk') & (`LTS` > 3)
+  zoom: 13
+  rule_message: _
+zoom14:
+  condition: (`highway` == 'trunk')
+  zoom: 11
+  rule_message: _
+zoom15:
+  condition: (`highway` == 'trunk_link')
+  zoom: 13
+  rule_message: _
+
+zoom16:
+  condition: (`highway` == 'motorway') & (`LTS` > 3)
+  zoom: 13
+  rule_message: _
+zoom17:
+  condition: (`highway` == 'motorway')
+  zoom: 11
+  rule_message: _
+zoom18:
+  condition: (`highway` == 'motorway_link')
+  zoom: 13
+  rule_message: _
+
+zoom30:
+  condition: (`highway` == 'cycleway')
+  zoom: 11
+  rule_message: _
+  
+zoom32:
+  condition: (`highway` == 'secondary')
+  zoom: 12
+  rule_message: _
+zoom33:
+  condition: (`highway` == 'secondary_link')
+  zoom: 14
+  rule_message: _
+zoom35:
+  condition: (`highway` == 'tertiary')
+  zoom: 13
+  rule_message: _
+zoom36:
+  condition: (`highway` == 'tertiary_link')
+  zoom: 15
+  rule_message: _
+zoom38:
+  condition: (`highway` == 'residential')
+  zoom: 14
+  rule_message: _
+zoom40:
+  condition: (`highway` == 'service')
+  zoom: 15
+  rule_message: _
+zoom42:
+  condition: (`highway` == 'footway')
+  zoom: 16
+  rule_message: _
+zoom44:
+  condition: (`highway` == 'pedestrian')
+  zoom: 16
+  rule_message: _
