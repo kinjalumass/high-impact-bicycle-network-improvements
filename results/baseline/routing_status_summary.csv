@@ -1,0 +1,13 @@
+rider_profile,found,status,od_records,modeled_demand
+child,False,no_path,3869,4432.0
+child,True,routed,38294,45383.0
+child,True,self_trip,131,185.0
+low_confidence_adult,False,no_path,3869,4432.0
+low_confidence_adult,True,routed,38294,45383.0
+low_confidence_adult,True,self_trip,131,185.0
+typical_adult,False,no_path,3869,4432.0
+typical_adult,True,routed,38294,45383.0
+typical_adult,True,self_trip,131,185.0
+experienced_adult,False,no_path,3869,4432.0
+experienced_adult,True,routed,38294,45383.0
+experienced_adult,True,self_trip,131,185.0
