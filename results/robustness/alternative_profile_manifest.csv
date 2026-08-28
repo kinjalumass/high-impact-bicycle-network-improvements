@@ -1,0 +1,5 @@
+profile,scenario_id,scenario_description,lts1_weight,lts2_weight,lts3_weight,lts4_weight,nodes,edges,graph_path
+child,5,child_high_aversion,1.0,3.0,6.0,12.0,98168,279932,/work/pi_plunkett_umass_edu/bcu/course_project/robustness/profile_graphs/greater_boston_child_scenario_5_simplified.graphml
+low_confidence_adult,10,low_confidence_adult_high_aversion,1.0,2.2,4.5,9.0,98168,279932,/work/pi_plunkett_umass_edu/bcu/course_project/robustness/profile_graphs/greater_boston_low_confidence_adult_scenario_10_simplified.graphml
+typical_adult,15,typical_adult_high_aversion,1.0,1.7,3.2,6.0,98168,279932,/work/pi_plunkett_umass_edu/bcu/course_project/robustness/profile_graphs/greater_boston_typical_adult_scenario_15_simplified.graphml
+experienced_adult,20,experienced_traffic_tolerant_high_aversion,1.0,1.3,2.2,4.5,98168,279932,/work/pi_plunkett_umass_edu/bcu/course_project/robustness/profile_graphs/greater_boston_experienced_adult_scenario_20_simplified.graphml

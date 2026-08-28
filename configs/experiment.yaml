@@ -170,8 +170,23 @@ optimization:
 
 robustness:
   alternative_rider_weights: true
+
+  alternative_profile_scenarios:
+    child: 5
+    low_confidence_adult: 10
+    typical_adult: 15
+    experienced_adult: 20
+
   second_fixed_od_sample: true
+  baseline_od_seed: 683
+  second_od_seed: 684
+
   evaluate_ranking_stability: true
+
+  stability_metrics:
+    - spearman_rank_correlation
+    - top_5_overlap
+    - optimized_package_overlap
 
 outputs:
   baseline_directory: "results/baseline"
