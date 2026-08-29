@@ -1,0 +1,7 @@
+figure,description
+01_baseline_rider_profiles.png,Baseline generalized route cost and physical route distance by rider profile.
+02_candidate_simulation_ranking.png,Top ten candidate infrastructure segments ranked after full rerouting simulation.
+03_greedy_package_progression.png,Cumulative modeled benefit across the five greedy optimization steps.
+04_final_package_by_profile.png,Final five-project package benefit for each rider profile.
+05_robustness_summary.png,Ranking and package stability under higher stress aversion and alternate OD sampling.
+06_candidate_locations.png,"Representative geographic locations of the ten fully simulated candidates, highlighting the baseline optimized package."
