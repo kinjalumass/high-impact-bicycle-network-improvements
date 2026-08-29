@@ -1,0 +1,3 @@
+experiment,spearman_rank_correlation,top_5_overlap_count,top_5_jaccard,baseline_package,robustness_package,optimized_package_overlap_count,optimized_package_overlap_fraction,optimized_package_jaccard,shared_optimized_projects,robustness_final_mean_benefit,robustness_final_length_m,benefit_directly_comparable_to_baseline,benefit_change_vs_baseline,benefit_change_pct_vs_baseline
+high_aversion,0.4666666666666666,3,0.4285714285714285,C001;C002;C003;C004;C006,C001;C006;C002;C005;C008,3,0.6,0.42857142857142855,C001;C002;C006,614814.0344773444,574.9153963346486,False,,
+od_seed_684,0.9757575757575756,5,1.0,C001;C002;C003;C004;C006,C001;C002;C003;C004;C006,5,1.0,1.0,C001;C002;C003;C004;C006,361276.695615512,779.6729964156474,True,-497.35867988469545,-0.13747770852538552
