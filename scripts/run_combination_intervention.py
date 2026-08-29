@@ -30,6 +30,34 @@ def find_target_lts(config: dict) -> int:
     return int(block["target_lts"])
 
 
+def scenario_weights(
+    scenario_id: int,
+) -> dict[int, float]:
+    """Load inherited BCU LTS weights for one cost scenario."""
+    path = Path(
+        "src/bcu_analysis/graph_builder/config/"
+        "cost_parameters.csv"
+    )
+
+    params = pd.read_csv(path).set_index(
+        "scenario_id"
+    )
+
+    if scenario_id not in params.index:
+        raise ValueError(
+            f"Unknown cost scenario {scenario_id}."
+        )
+
+    row = params.loc[scenario_id]
+
+    return {
+        level: float(
+            row[f"lts{level}_weight"]
+        )
+        for level in (1, 2, 3, 4)
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
 
@@ -39,6 +67,16 @@ def main() -> None:
         help="Comma-separated candidate IDs, e.g. C001,C002",
     )
     parser.add_argument("--profile", required=True)
+    parser.add_argument(
+        "--weight-scenario",
+        type=int,
+        default=None,
+        help=(
+            "Optional inherited BCU cost scenario whose "
+            "LTS weights should be used for package "
+            "intervention costs."
+        ),
+    )
     parser.add_argument("--graph", required=True)
     parser.add_argument("--od", required=True)
     parser.add_argument("--candidates", required=True)
@@ -109,9 +147,24 @@ def main() -> None:
         f"{G.number_of_edges():,} edges"
     )
 
-    weights = profile_weights(
-        config,
-        args.profile,
+    if args.weight_scenario is None:
+        weights = profile_weights(
+            config,
+            args.profile,
+        )
+        weight_source = "baseline profile"
+    else:
+        weights = scenario_weights(
+            args.weight_scenario
+        )
+        weight_source = (
+            f"BCU scenario {args.weight_scenario}"
+        )
+
+    print(
+        "Intervention weights:",
+        weight_source,
+        weights,
     )
 
     modifications = apply_candidate_set(
