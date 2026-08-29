@@ -1,29 +1,307 @@
 # Identifying High-Impact Bicycle Network Improvements
 
-COMPSCI 683 Project
+COMPSCI 683 — Artificial Intelligence
+University of Massachusetts Amherst
 
-This project evaluates which bicycle-network infrastructure improvements
-could produce the greatest modeled benefit in the Boston/Greater Boston
-cycling network using Level of Traffic Stress, modeled travel demand,
-population, destinations, and graph-search algorithms.
+## Overview
 
-The project builds upon the Boston Cyclists Union / UMass CDS graph
-analysis pipeline and extends it with:
+This project develops a graph-based framework for identifying high-impact bicycle infrastructure improvements in Greater Boston.
 
-1. UCS and A* routing comparison
-2. rider-profile-specific routing
-3. candidate infrastructure improvement generation
-4. before/after network intervention simulations
-5. demand-weighted benefit scoring
-6. greedy constrained project selection
-7. robustness analysis
+Rather than ranking stressful streets in isolation, the method evaluates how improving a road segment changes bicycle routes across the network. It combines:
+
+* Level of Traffic Stress (LTS)
+* modeled origin-destination demand
+* rider-specific stress preferences
+* Uniform-Cost Search (UCS)
+* A* search
+* before/after network intervention simulation
+* greedy multi-project optimization
+* robustness analysis
+
+The central research question is:
+
+> **Which bicycle-network infrastructure improvements produce the greatest modeled reduction in travel stress for riders in Greater Boston?**
+
+## Main Result
+
+The baseline optimization selected the following five-project package:
+
+1. **C001 — Chauncy Street**
+2. **C002 — Cambridge Street**
+3. **C003 — Hyde Park Avenue**
+4. **C004 — Beacon Street**
+5. **C006 — Dartmouth Street**
+
+The package produced a mean demand-weighted generalized-cost reduction of approximately:
+
+**361,774**
+
+across the four modeled rider profiles.
+
+Its cumulative candidate length was approximately:
+
+**779.67 meters**
+
+![Greedy optimization progression](reports/figures/03_greedy_package_progression.png)
+
+## Why Generalized Cost?
+
+Shortest physical distance alone does not represent bicycle route preference well because cyclists may choose longer routes to avoid stressful roads.
+
+For edge \(e\):
+
+$$
+\mathrm{Cost}(e)
+=
+\mathrm{Length}(e)
+\times
+\mathrm{StressWeight}(\mathrm{LTS}(e))
+$$
+
+Four rider profiles are modeled:
+
+* Child
+* Low-confidence adult
+* Typical adult
+* Experienced adult
+
+More stress-sensitive riders assign higher penalties to LTS 3 and LTS 4 roads.
+
+![Baseline rider profiles](reports/figures/01_baseline_rider_profiles.png)
+
+## Data
+
+The analysis uses the Greater Boston bicycle-network graph developed through the Boston Cyclists Union / UMass Center for Data Science analysis pipeline.
+
+The simplified routing graph contains approximately:
+
+* **98,168 nodes**
+* **279,932 directed edges**
+
+The modeled demand dataset contains approximately:
+
+* **42,294 OD records**
+* **50,000 total modeled demand units**
+* **45,568 routed demand units**
+* **91.1% demand-weighted routing success**
+
+Demand includes trips to categories such as:
+
+* employment
+* schools
+* healthcare
+* transit
+* greenspace
+* stores
+
+## Routing
+
+Both UCS and A* were implemented and benchmarked.
+
+On the routing benchmark:
+
+* both algorithms returned the same optimal route costs for routable OD pairs;
+* A* generally expanded fewer nodes;
+* A* generally ran faster while preserving optimality.
+
+For the full experiments, one-to-many routing was used to efficiently evaluate many destination records from the same origin.
+
+## Candidate Generation
+
+Twenty candidate high-stress segments were generated using modeled demand and stress exposure.
+
+The strongest ten candidates were evaluated using full intervention simulations.
+
+For each candidate:
+
+1. its LTS was reduced to 2;
+2. rider-specific edge costs were updated;
+3. the full modeled demand set was rerouted;
+4. new routes were compared with baseline routes;
+5. demand-weighted generalized-cost reduction was calculated.
+
+## Top Individual Interventions
+
+| Rank | Candidate | Location             | Mean generalized-cost reduction |
+| ---: | --------- | -------------------- | ------------------------------: |
+|    1 | C001      | Chauncy Street       |                       93,316.79 |
+|    2 | C002      | Cambridge Street     |                       85,055.17 |
+|    3 | C003      | Hyde Park Avenue     |                       75,082.18 |
+|    4 | C004      | Beacon Street        |                       63,188.53 |
+|    5 | C006      | Dartmouth Street     |                       52,581.37 |
+|    6 | C007      | Longwood Avenue      |                       48,695.65 |
+|    7 | C005      | Pond Street          |                       47,615.96 |
+|    8 | C010      | South Service Road   |                       47,575.31 |
+|    9 | C008      | Columbia Road        |                       41,016.96 |
+|   10 | C009      | Massachusetts Avenue |                       39,577.98 |
+
+![Candidate ranking](reports/figures/02_candidate_simulation_ranking.png)
+
+## Greedy Optimization
+
+Simply selecting the five strongest individual projects would assume that intervention benefits are independent.
+
+Instead, the project uses greedy optimization.
+
+At every round:
+
+1. each remaining candidate is added temporarily to the existing package;
+2. the full OD set is rerouted;
+3. the total package benefit is recomputed;
+4. marginal benefit is calculated;
+5. the highest-marginal-benefit candidate is selected.
+
+The final sequence was:
+
+| Step | Candidate | Total package benefit | Marginal benefit |
+| ---: | --------- | --------------------: | ---------------: |
+|    1 | C001      |             93,316.79 |        93,316.79 |
+|    2 | C002      |            178,121.57 |        84,804.78 |
+|    3 | C003      |            253,261.05 |        75,139.48 |
+|    4 | C004      |            308,539.49 |        55,278.44 |
+|    5 | C006      |            361,774.05 |        53,234.57 |
+
+## Effects by Rider Profile
+
+The final package benefits stress-sensitive riders most strongly.
+
+| Rider profile        | Generalized-cost reduction | Improved modeled demand |
+| -------------------- | -------------------------: | ----------------------: |
+| Child                |                 524,364.96 |                   2,642 |
+| Low-confidence adult |                 483,479.57 |                   2,648 |
+| Typical adult        |                 320,866.11 |                   2,342 |
+| Experienced adult    |                 118,385.58 |                   1,995 |
+
+Physical route-distance changes were very small.
+
+This indicates that the main modeled benefit is **reduced travel stress rather than shorter travel distance**.
+
+## Robustness
+
+Two robustness experiments were performed.
+
+### Alternate OD Sample
+
+A second fixed OD sample was generated using seed 684 instead of seed 683.
+
+Results were highly stable:
+
+* Spearman rank correlation: **0.976**
+* Top-5 candidate overlap: **5/5**
+* Optimized-package overlap: **5/5**
+* Final optimized package: exactly the same as baseline
+* Final benefit change: approximately **-0.137%**
+
+### Higher Stress Aversion
+
+More strongly stress-averse rider profiles were also tested.
+
+Results were more sensitive:
+
+* Spearman rank correlation: **0.467**
+* Top-5 candidate overlap: **3/5**
+* Optimized-package overlap: **3/5**
+
+The high-aversion optimized package was:
+
+**C001 + C006 + C002 + C005 + C008**
+
+Three projects remained common to both optimized packages:
+
+* C001
+* C002
+* C006
+
+![Robustness summary](reports/figures/05_robustness_summary.png)
+
+## Interpretation
+
+The results suggest three main conclusions.
+
+First, bicycle-infrastructure value is a network effect. Local demand or LTS alone does not determine the value of an intervention.
+
+Second, the baseline optimized package is highly robust to changes in the sampled OD demand.
+
+Third, infrastructure rankings depend materially on assumptions about rider stress sensitivity. More strongly stress-averse riders shift the relative importance of several projects.
+
+## Limitations
+
+Important limitations include:
+
+* demand is modeled rather than directly observed;
+* interventions are modeled as reducing existing-edge LTS to 2;
+* no construction-cost model is included;
+* optimization is constrained to five projects rather than a monetary budget;
+* network topology remains fixed;
+* rider preferences are represented by predefined LTS weights;
+* optimization occurs within the generated candidate set rather than over every possible infrastructure project.
 
 ## Repository Structure
 
-- `src/bcu_analysis/` — reused graph, demand, routing, and analysis infrastructure
-- `src/bike_improvements/` — COMPSCI 683 project-specific implementation
-- `configs/` — reproducible experiment configurations
-- `scripts/` — experiment entry points
-- `tests/` — tests
-- `results/` — generated experimental results
-- `reports/` — project report material
+```text
+configs/
+    Experiment configurations
+
+scripts/
+    Experiment entry points, Slurm jobs,
+    result collection, robustness analysis,
+    and figure generation
+
+src/bcu_analysis/
+    Reused Boston Cyclists Union / UMass
+    routing and graph-analysis infrastructure
+
+src/bike_improvements/
+    COMPSCI 683 project-specific implementation
+
+tests/
+    Automated tests
+
+results/
+    Baseline, candidate, intervention,
+    optimization, routing, and robustness results
+
+reports/
+    Final report and figures
+```
+
+## Reproducing the Analysis
+
+Run the automated tests with:
+
+```bash
+pytest -q
+```
+
+The final report figures can be regenerated with:
+
+```bash
+python scripts/create_final_figures.py
+```
+
+Key result tables are stored under:
+
+```text
+results/baseline/
+results/candidates/
+results/interventions/
+results/optimization/
+results/robustness/
+results/routing/
+```
+
+The full report is available at:
+
+```text
+reports/final_report.md
+```
+
+## Final Optimized Package
+
+**C001 — Chauncy Street**
+**C002 — Cambridge Street**
+**C003 — Hyde Park Avenue**
+**C004 — Beacon Street**
+**C006 — Dartmouth Street**
+
+The experiments indicate that this package provides strong modeled network-wide benefit across rider profiles and remains exceptionally stable under alternate OD sampling.
