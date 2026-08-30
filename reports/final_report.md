@@ -90,6 +90,14 @@ The four profiles produced meaningfully different baseline route choices.
 
 The low-confidence and child profiles generally incurred greater generalized costs and slightly longer routes because they were more strongly penalized for using stressful road segments. Experienced riders accepted more stressful links and therefore obtained shorter physical routes on average.
 These differences demonstrate why infrastructure ranking should not be based on a single generic cyclist model.
+### 5.1 High-Stress Roads Carrying High Modeled Route Load
+
+![Baseline high-stress roads carrying high modeled demand](figures/07_high_stress_high_demand_map.png)
+
+**Figure 7. Baseline high-stress roads carrying high modeled route load.** The map shows LTS 3–4 road segments used by the typical-adult baseline routes and emphasizes segments at or above the 95th percentile of modeled baseline edge use. Among 13,696 used high-stress directed edges, the 95th-percentile threshold was a `path_count` of 136, highlighting 690 directed edges representing 654 physical edge pairs.
+
+This visualization makes the geographic overlap between stressful infrastructure and substantial modeled bicycle-route use explicit. It complements the candidate-generation procedure by showing that high stress alone is not the prioritization criterion; the analysis is particularly interested in high-stress segments that also interact with meaningful modeled travel demand.
+
 ## 6. Candidate Generation
 The candidate-generation stage screened the bicycle network for high-stress road segments with substantial modeled demand-weighted stress exposure.
 Twenty candidates were retained for screening. The strongest ten were advanced to computationally expensive full-intervention simulations.
@@ -119,7 +127,17 @@ For each of the top ten candidates:
 - demand-weighted generalized-cost reduction was calculated.
 This provides an estimate of network-wide modeled benefit rather than simply measuring the improved edge itself.
 No candidate was allowed to increase an optimal route's generalized cost. Network topology remained fixed, so interventions changed traversal cost rather than creating new links.
-### 7.1 Individual Candidate Ranking
+### 7.1 Example Before-and-After Route
+
+![Before and after routing for the C001 Chauncy Street intervention](figures/08_before_after_route_example.png)
+
+**Figure 8. Example before-and-after route under the C001 Chauncy Street intervention.** The example is a typical-adult home-to-office OD record with modeled demand 5. Its generalized route cost decreases from 9,148.81 to 9,073.39 after the Chauncy Street segment is improved from its baseline stress level to LTS 2.
+
+The physical route simultaneously changes from 3,381.89 m and 101 directed edges to 3,744.08 m and 116 directed edges. The two solutions share 75 edges, while 26 edges occur only in the baseline route and 41 occur only in the intervention route. Thus, the post-intervention route is approximately 362.19 m longer but still has 75.42 lower generalized cost.
+
+This example illustrates the purpose of stress-aware routing: an infrastructure improvement can change the preferred route even when the resulting path is physically longer, because the additional distance can be outweighed by lower modeled traffic stress.
+
+### 7.2 Individual Candidate Ranking
 
 ![Candidate simulation ranking](figures/02_candidate_simulation_ranking.png)
 

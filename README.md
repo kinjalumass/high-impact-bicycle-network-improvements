@@ -130,6 +130,12 @@ results/routing/manual_route_path_checks.md
 
 For the full experiments, one-to-many routing was used to efficiently evaluate many destination records from the same origin.
 
+### High-Stress / High-Use Baseline Map
+
+![Baseline high-stress roads carrying high modeled route load](reports/figures/07_high_stress_high_demand_map.png)
+
+The typical-adult baseline contains 13,696 used LTS 3–4 directed edges. Figure 7 emphasizes segments at or above the 95th percentile of baseline modeled edge use (`path_count >= 136`), yielding 690 highlighted directed edges representing 654 physical edge pairs.
+
 ## Candidate Generation
 
 Twenty candidate high-stress segments were generated using modeled demand and stress exposure.
@@ -160,6 +166,14 @@ For each candidate:
 |   10 | C009      | Massachusetts Avenue |                       39,577.98 |
 
 ![Candidate ranking](reports/figures/02_candidate_simulation_ranking.png)
+
+### Before-and-After Route Example
+
+![Before and after routing for C001](reports/figures/08_before_after_route_example.png)
+
+For one actual typical-adult home-to-office OD record affected by **C001 — Chauncy Street**, generalized route cost decreases from **9,148.81 to 9,073.39** after intervention. The preferred route changes from **3,381.89 m / 101 edges** to **3,744.08 m / 116 edges**.
+
+The example demonstrates an important feature of the model: the preferred post-intervention route can be physically longer while still having lower generalized cost because it provides a less stressful route.
 
 ## Greedy Optimization
 
