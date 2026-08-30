@@ -5,3 +5,5 @@ figure,description
 04_final_package_by_profile.png,Final five-project package benefit for each rider profile.
 05_robustness_summary.png,Ranking and package stability under higher stress aversion and alternate OD sampling.
 06_candidate_locations.png,"Representative geographic locations of the ten fully simulated candidates, highlighting the baseline optimized package."
+07_high_stress_high_demand_map.png,"Baseline typical-adult LTS 3–4 road segments, highlighting the top five percent by modeled demand-weighted edge load."
+08_before_after_route_example.png,Before/after route example for the C001 Chauncy Street intervention under the typical-adult profile.
