@@ -104,6 +104,30 @@ On the routing benchmark:
 * A* generally expanded fewer nodes;
 * A* generally ran faster while preserving optimality.
 
+### UCS vs. A* Validation
+
+A deterministic 100-pair benchmark verified both correctness and search efficiency.
+
+| Metric | UCS | A* | A* reduction |
+|---|---:|---:|---:|
+| Routable pairs | 93 | 93 | — |
+| Mean runtime | 0.05885 s | 0.05175 s | 12.1% |
+| Median runtime | 0.02056 s | 0.01099 s | 46.5% |
+| Mean nodes expanded | 19,799.55 | 12,033.43 | 39.2% |
+| Median nodes expanded | 8,349 | 2,922 | 65.0% |
+| Mean routable route cost | 6,965.06 | 6,965.06 | 0% |
+
+Five representative benchmark routes ranging from approximately 8 m to 12.26 km were also inspected at the full path-sequence level. In all five cases, UCS and A* produced identical generalized cost, physical distance, node sequence, and directed-edge sequence.
+
+Detailed validation artifacts are available in:
+
+```text
+results/routing/ucs_astar_validation_summary.csv
+results/routing/manual_route_checks.csv
+results/routing/manual_route_path_checks.csv
+results/routing/manual_route_path_checks.md
+```
+
 For the full experiments, one-to-many routing was used to efficiently evaluate many destination records from the same origin.
 
 ## Candidate Generation
@@ -150,6 +174,12 @@ At every round:
 3. the total package benefit is recomputed;
 4. marginal benefit is calculated;
 5. the highest-marginal-benefit candidate is selected.
+
+### Optimization Constraint
+
+The original proposal contemplated either a project-count limit or a cumulative improved-road-length limit. The final implementation uses a **maximum-five-project constraint**.
+
+A hard road-length budget was not imposed because physical length alone is not a reliable proxy for construction cost. Projects of equal length can differ substantially in intersection treatment, right-of-way requirements, engineering complexity, and construction requirements. Cumulative candidate length is therefore reported descriptively and used only as a secondary tie-breaker.
 
 The final sequence was:
 

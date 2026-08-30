@@ -46,6 +46,35 @@ This formulation allows the routing algorithms to select longer but lower-stress
 Both uniform-cost search and A* were implemented and evaluated.
 UCS guarantees an optimal route under the generalized edge-cost definition by expanding nodes in increasing path-cost order. A* supplements accumulated path cost with an admissible geographic heuristic to guide the search toward the destination.
 Benchmark testing confirmed that both algorithms produced the same optimal route costs for routable test pairs. A* generally reduced search effort relative to UCS while preserving optimality.
+### 4.1 UCS and A* Validation
+
+A deterministic benchmark compared UCS and A* on 100 identical origin-destination pairs from the baseline network. Both algorithms found routes for the same 93 pairs, while the remaining seven pairs were unreachable under both algorithms.
+
+| Metric | UCS | A* | A* reduction |
+|---|---:|---:|---:|
+| Routable pairs | 93 | 93 | — |
+| Mean runtime, all pairs | 0.05885 s | 0.05175 s | 12.1% |
+| Median runtime, all pairs | 0.02056 s | 0.01099 s | 46.5% |
+| Mean nodes expanded | 19,799.55 | 12,033.43 | 39.2% |
+| Median nodes expanded | 8,349 | 2,922 | 65.0% |
+| Mean generalized cost, routable pairs | 6,965.06 | 6,965.06 | 0% |
+
+The maximum UCS/A* optimal-cost difference across routable benchmark pairs was zero.
+
+Five representative routable OD pairs were then rerun and inspected at the complete node-path and directed-edge-path level. The cases span routes from approximately 8 meters to 12.26 kilometers.
+
+| Check | Trip category | Distance | Directed edges | UCS nodes expanded | A* nodes expanded | Exact node/edge path match |
+|---|---|---:|---:|---:|---:|---|
+| R1 | School | 7.98 m | 2 | 18 | 5 | Yes |
+| R2 | School | 617.09 m | 8 | 46 | 27 | Yes |
+| R3 | Store | 2,006.78 m | 82 | 10,231 | 3,906 | Yes |
+| R4 | Office | 3,977.44 m | 94 | 9,772 | 5,810 | Yes |
+| R5 | Store | 12,260.47 m | 215 | 58,068 | 28,560 | Yes |
+
+For all five inspected routes, UCS and A* produced identical generalized cost, physical distance, complete node sequence, and complete directed-edge sequence. This provides an explicit path-level check in addition to the aggregate optimal-cost benchmark.
+
+The complete validation records, including serialized node and edge sequences, are stored in `results/routing/manual_route_path_checks.csv` and summarized in `results/routing/manual_route_path_checks.md`.
+
 For the large experimental runs, one-to-many routing was used so that routes from a common origin could be computed efficiently across many destination records.
 ## 5. Baseline Routing Results
 
@@ -119,7 +148,7 @@ At each step:
 - the total package benefit was recomputed;
 - the marginal benefit relative to the previous package was calculated; and
 - the remaining candidate with the largest marginal benefit was selected.
-The optimization was constrained to a maximum of five projects. Because a credible construction-cost model was not available, number of projects—not monetary cost—was the optimization constraint. Cumulative candidate length is reported descriptively and used only as a lower-priority tie-breaker.
+The optimization was constrained to a maximum of five projects. The original proposal contemplated either a project-count limit or a cumulative improved-road-length limit. The final implementation uses the project-count constraint because physical road length alone is not a credible proxy for implementation cost: projects of similar length can differ substantially in intersection treatment, right-of-way requirements, engineering complexity, and construction requirements. Because a credible project-specific construction-cost model was not available, cumulative candidate length is reported descriptively and used only as a lower-priority tie-breaker rather than imposed as a hard optimization budget.
 ### 8.1 Greedy Selection Sequence
 
 ![Greedy package progression](figures/03_greedy_package_progression.png)
