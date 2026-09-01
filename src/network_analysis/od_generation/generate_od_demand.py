@@ -3,10 +3,10 @@ import os
 
 import pandas as pd
 
-from bcu_analysis.graph_builder.build_cost_graph import CITY_OPTIONS, resolve_area
-from bcu_analysis.od_generation.build_poi_od_pairs import build_poi_od_pairs
-from bcu_analysis.od_generation.lodes_pairs import generate_lodes_pairs
-from bcu_analysis.od_generation.lodes_sampling import sample_lodes_trips
+from network_analysis.graph_builder.build_cost_graph import CITY_OPTIONS, resolve_area
+from network_analysis.od_generation.build_poi_od_pairs import build_poi_od_pairs
+from network_analysis.od_generation.lodes_pairs import generate_lodes_pairs
+from network_analysis.od_generation.lodes_sampling import sample_lodes_trips
 
 # The LODES home->work commute pipeline is driven by this demand category; every other
 # category is handled by the population-weighted POI pipeline.
@@ -121,7 +121,7 @@ def main(
     if not os.path.exists(graph_path):
         raise FileNotFoundError(
             f"Cost graph not found: {graph_path}. Build it first with "
-            f"'python src/bcu_analysis/graph_builder/build_cost_graph.py {cost_scenario} {area} "
+            f"'python src/network_analysis/graph_builder/build_cost_graph.py {cost_scenario} {area} "
             f"--data-dir {data_dir}'."
         )
 

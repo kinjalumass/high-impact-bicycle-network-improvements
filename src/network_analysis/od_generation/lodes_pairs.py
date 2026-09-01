@@ -2,7 +2,7 @@ import os
 
 import geopandas as gpd
 import osmnx as ox
-from bcu_analysis.od_generation.lodes_io import read_lodes_data, read_crosswalk
+from network_analysis.od_generation.lodes_io import read_lodes_data, read_crosswalk
 
 def generate_lodes_pairs(
     graph_path,

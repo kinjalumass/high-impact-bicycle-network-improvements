@@ -15,19 +15,19 @@ DIRS = ['fwd', 'rev']
 # %% Read Configuration Files
 def read_tables():
     # tables.yml replicates the LTS tables from /config/LTS-Tables-v2.2.pdf
-    with open('src/bcu_analysis/graph_builder/config/tables.yml', 'r') as yml_file:
+    with open('src/network_analysis/graph_builder/config/tables.yml', 'r') as yml_file:
         tables = yaml.safe_load(yml_file)
     return tables
 
 def read_rating():
     # Set assumptions used in LTS calculations based on segment conditions
-    with open('src/bcu_analysis/graph_builder/config/rating_dict.yml', 'r') as yml_file:
+    with open('src/network_analysis/graph_builder/config/rating_dict.yml', 'r') as yml_file:
         rating_dict = yaml.safe_load(yml_file)
     return rating_dict
 
 def read_parse():
     # Convert OSM tags to functional information for LTS calculations
-    with open('src/bcu_analysis/graph_builder/config/lane_parse.yml', 'r') as yml_file:
+    with open('src/network_analysis/graph_builder/config/lane_parse.yml', 'r') as yml_file:
         parse_dict = yaml.safe_load(yml_file)
     return parse_dict
 

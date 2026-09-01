@@ -10,7 +10,7 @@ import geopandas as gpd
 import osmnx as ox
 import pandas as pd
 
-from bcu_analysis.census.assignment import assign_population_to_nodes_by_tract_area
+from network_analysis.census.assignment import assign_population_to_nodes_by_tract_area
 
 REGIONS = {
     "boston": ("Boston, Massachusetts, USA",),

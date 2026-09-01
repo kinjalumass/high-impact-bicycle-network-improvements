@@ -10,7 +10,7 @@ import time
 import argparse
 
 useragent = {'User-Agent': 'bicycle-network-analysis'}
-queryFolder = 'src/bcu_analysis/destination_csvs/query'
+queryFolder = 'src/network_analysis/destination_csvs/query'
 overpass_url = "https://overpass-api.de/api/interpreter"
 OVERWRITE = False
 

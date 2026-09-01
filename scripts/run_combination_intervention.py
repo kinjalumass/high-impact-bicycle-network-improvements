@@ -35,7 +35,7 @@ def scenario_weights(
 ) -> dict[int, float]:
     """Load LTS weights for one cost scenario."""
     path = Path(
-        "src/bcu_analysis/graph_builder/config/"
+        "src/network_analysis/graph_builder/config/"
         "cost_parameters.csv"
     )
 

@@ -1,7 +1,7 @@
 import argparse
 
-from bcu_analysis.graph_builder import osm_download
-from bcu_analysis.graph_builder import assign_cost
+from network_analysis.graph_builder import osm_download
+from network_analysis.graph_builder import assign_cost
 
 CITIES = {
     'boston': ('Boston, Massachusetts', 'wikipedia', 'en:Boston'),

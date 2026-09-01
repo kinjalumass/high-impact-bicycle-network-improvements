@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
-from bcu_analysis.census.run_tract_accessibility_regressions import (
+from network_analysis.census.run_tract_accessibility_regressions import (
     PREDICTORS,
 )
 

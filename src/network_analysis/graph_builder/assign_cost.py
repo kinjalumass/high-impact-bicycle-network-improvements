@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import osmnx as ox
 
-from bcu_analysis.graph_builder import lts_functions as lts
+from network_analysis.graph_builder import lts_functions as lts
 
 # LTS 0 means "no bike access" and NaN means LTS could not be determined.
 # Both are given a large penalty so routing avoids them when any alternative

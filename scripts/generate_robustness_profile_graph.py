@@ -23,7 +23,7 @@ UNSIMPLIFIED = Path(
 )
 
 COST_PARAMETERS = Path(
-    "src/bcu_analysis/graph_builder/config/"
+    "src/network_analysis/graph_builder/config/"
     "cost_parameters.csv"
 )
 

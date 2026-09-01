@@ -4,14 +4,14 @@ from pathlib import Path
 
 import pandas as pd
 
-from bcu_analysis.od_generation.build_poi_od_pairs import (
+from network_analysis.od_generation.build_poi_od_pairs import (
     build_poi_od_pairs,
 )
-from bcu_analysis.od_generation.generate_od_demand import (
+from network_analysis.od_generation.generate_od_demand import (
     LODES_CATEGORY,
     load_demand,
 )
-from bcu_analysis.od_generation.lodes_sampling import (
+from network_analysis.od_generation.lodes_sampling import (
     sample_lodes_trips,
 )
 
@@ -52,7 +52,7 @@ DESTINATIONS = (
 )
 
 CONFIG = Path(
-    "src/bcu_analysis/od_generation/config/"
+    "src/network_analysis/od_generation/config/"
     "demand_parameters.csv"
 )
 

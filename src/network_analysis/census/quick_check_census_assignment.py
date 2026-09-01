@@ -1,7 +1,7 @@
 import osmnx as ox
 import geopandas as gpd
 
-from bcu_analysis.census.assignment import assign_population_to_nodes_by_tract_area
+from network_analysis.census.assignment import assign_population_to_nodes_by_tract_area
 
 print("Loading graph...")
 G = ox.load_graphml("data/Boston_3.graphml")

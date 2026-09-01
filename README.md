@@ -291,7 +291,7 @@ scripts/
     result collection, robustness analysis,
     and figure generation
 
-src/bcu_analysis/
+src/network_analysis/
     Network construction, LTS processing, Census integration,
     destination processing, OD-demand generation, and road-usage utilities
 
