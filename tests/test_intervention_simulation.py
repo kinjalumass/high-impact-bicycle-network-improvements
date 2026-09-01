@@ -148,4 +148,3 @@ def test_route_comparison_rejects_extra_intervention_row():
             baseline,
             intervention,
         )
-
