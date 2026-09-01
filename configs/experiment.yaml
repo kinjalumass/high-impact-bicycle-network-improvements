@@ -88,11 +88,13 @@ routing:
   preserve_per_od_results: true
 
   per_od_output_fields:
+    - rider_profile
     - origin_node
     - destination_node
-    - destination_category
+    - category
     - demand
-    - rider_profile
+    - found
+    - status
     - route_cost
     - route_distance
     - route_edge_count

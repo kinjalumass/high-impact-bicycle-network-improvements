@@ -770,7 +770,7 @@ def main() -> None:
         ),
     ]
 
-    manifest = pd.DataFrame(
+    new_manifest = pd.DataFrame(
         [
             {
                 "figure": path.name,
@@ -780,8 +780,38 @@ def main() -> None:
         ]
     )
 
+    manifest_path = (
+        FIGURE_DIR
+        / "figure_manifest.csv"
+    )
+
+    if manifest_path.exists():
+        existing = pd.read_csv(
+            manifest_path
+        )
+
+        manifest = pd.concat(
+            [
+                existing.loc[
+                    ~existing["figure"].isin(
+                        new_manifest["figure"]
+                    )
+                ],
+                new_manifest,
+            ],
+            ignore_index=True,
+        )
+    else:
+        manifest = new_manifest
+
+    manifest = (
+        manifest
+        .sort_values("figure")
+        .reset_index(drop=True)
+    )
+
     manifest.to_csv(
-        FIGURE_DIR / "figure_manifest.csv",
+        manifest_path,
         index=False,
     )
 

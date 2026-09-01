@@ -316,6 +316,7 @@ reports/
 Run the automated tests with:
 
 ```bash
+python -m pip install -e ".[test]"
 pytest -q
 ```
 
@@ -328,6 +329,8 @@ source .project_env
 ```
 
 The local `.project_env` file is intentionally excluded from version control.
+
+Large source and intermediate graph/data artifacts are not committed to this repository. Full experimental reruns require the separately stored project-data directory configured through these environment variables. The committed `results/` tables and report figures preserve the outputs used in the final analysis.
 
 Report Figures 1–6 can be regenerated from the committed result tables with:
 

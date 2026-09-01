@@ -11,7 +11,7 @@ description = "COMPSCI 683 project evaluating high-impact bicycle network improv
 readme = "README.md"
 
 # What version of python does your library work with?
-# numpy 2.5 requires >=3.12; environment.yml used 3.12
+# numpy 2.5 requires >=3.12; this project uses Python 3.12
 requires-python = ">=3.12"
 
 # Metadata about your package in case you upload it to PYPI

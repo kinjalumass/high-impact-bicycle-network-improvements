@@ -251,8 +251,8 @@ The numerical benefit magnitude from the high-aversion experiment should not be 
 ## 11. Discussion
 Several conclusions emerge from the experiments.
 First, infrastructure benefit is a network effect. A candidate's importance cannot be determined reliably from its local stress level or local demand alone. Full rerouting captures how an improvement changes the set of attractive routes across the network.
-Second, lower-confidence riders receive the largest modeled benefits from the selected improvements. The final five-project package particularly benefits child and low-confidence profiles because higher-stress segments carry greater penalties for those riders.
-Third, the strongest candidates are relatively stable to demand resampling. The alternate OD experiment reproduced the same top-five candidate set and the exact same optimized five-project package.
+Second, more stress-sensitive rider profiles receive the largest modeled benefits from the selected improvements. The final five-project package particularly benefits child and low-confidence profiles because higher-stress segments carry greater penalties for those riders.
+Third, the strongest candidates were stable under the alternate OD sample tested. The alternate OD experiment reproduced the same top-five candidate set and the exact same optimized five-project package.
 Fourth, rider-behavior assumptions matter substantially. More severe stress aversion changed both individual rankings and the final optimized package. This is not a failure of the framework; rather, it identifies an important planning uncertainty. Infrastructure priorities depend partly on whose routing preferences the system is intended to support.
 Finally, the selected package primarily reduces modeled traffic stress rather than physical travel distance. The network intervention can therefore provide meaningful modeled benefit even when trip distance stays nearly constant.
 ## 12. Limitations

@@ -29,8 +29,7 @@ Repository:
 https://github.com/kinjalumass/StressMap
 
 The graph-building pipeline contains LTS-processing code based on the
-StressMap project. The original repository is retained as a Git remote
-for provenance and comparison.
+StressMap project. The source repository is linked above for provenance and comparison.
 
 ## COMPSCI 683 Project-Specific Work
 
