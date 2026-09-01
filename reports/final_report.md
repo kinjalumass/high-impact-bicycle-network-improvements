@@ -22,13 +22,31 @@ The project develops a graph-based intervention-analysis framework that combines
 - robustness analysis under alternate demand and rider-behavior assumptions.
 The purpose is not to predict the exact real-world effect of construction. Instead, the framework provides a reproducible computational method for comparing candidate improvements according to their modeled ability to reduce bicycle travel stress across a large travel-demand sample.
 ## 2. Data and Network Representation
-The study uses a Greater Boston bicycle-network representation derived from OpenStreetMap street-network data and Level of Traffic Stress information based on the StressMap methodology.
-The simplified routing graph contains approximately 98,000 nodes and 280,000 directed edges. Each relevant road segment is associated with a Level of Traffic Stress value from 1 through 4:
+
+The study area consists of Boston, Cambridge, Somerville, and Brookline. The street network is derived from OpenStreetMap and represented as a directed graph. Level of Traffic Stress (LTS) values are computed from roadway attributes using the StressMap methodology and associated LTS rule tables. The LTS-processing pipeline uses roadway characteristics such as bicycle-facility configuration, prevailing speed, lane configuration, parking, roadway width, separation, and related OpenStreetMap attributes to assign stress levels to directed roadway edges.
+
+Each roadway edge has a physical length and an LTS value. Rider-specific traversal costs are constructed by multiplying physical edge length by the stress weight assigned to that LTS level for the rider profile. Edges for which bicycle access is unavailable or LTS cannot be determined receive a large traversal penalty so that they are avoided when feasible alternatives exist.
+
+The original directed network is simplified for routing by merging chains of roadway edges between intersections. Physical length and generalized traversal cost are summed across constituent edges, while the worst relevant LTS value is retained for the merged segment. The resulting routing graph contains approximately 98,168 nodes and 279,932 directed edges.
+
+LTS values are interpreted as:
 - LTS 1: lowest-stress conditions;
 - LTS 2: generally comfortable for a broader set of riders;
 - LTS 3: higher-stress conditions;
 - LTS 4: highest-stress conditions.
-The modeled demand dataset contains approximately 42,000 origin-destination records representing 50,000 units of total modeled demand. Trips include several destination categories, including employment, schools, healthcare, transit, greenspace, and stores.
+
+The fixed modeled-demand dataset contains 50,000 trips across six categories:
+- 20,000 employment trips;
+- 20,000 school trips;
+- 3,000 healthcare trips;
+- 2,000 transit trips;
+- 2,000 greenspace trips; and
+- 3,000 store trips.
+
+Employment demand is derived from 2023 Massachusetts Census LODES primary-job origin-destination records. Census blocks are mapped to the bicycle network and employment OD pairs are sampled using job counts together with a distance-decay model.
+
+For the non-employment categories, home origins are sampled using node-level population weights across the four-municipality study area. Destinations are derived from OpenStreetMap points of interest, including schools, healthcare facilities, rail-transit locations, greenspace, supermarkets, and convenience stores. The resulting fixed baseline demand table contains approximately 42,294 aggregated origin-destination-category records. The historical random seed used to produce this fixed baseline sample is not known, so the analysis treats the stored baseline OD table itself as the reproducible experimental input.
+
 Under the baseline network, 45,568 of the 50,000 modeled demand units were routable, corresponding to a demand-weighted routing success rate of approximately 91.1%. Unroutable demand was retained as a property of network topology rather than altered by the cost-only interventions evaluated here.
 ## 3. Rider-Specific Generalized Cost
 Shortest physical distance alone is insufficient for modeling bicycle-route preference because riders may accept additional distance to avoid stressful roads.
