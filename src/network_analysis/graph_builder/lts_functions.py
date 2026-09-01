@@ -2,13 +2,22 @@
 Here are the functions used to process OSM data and calculate LTS. 
 '''
 
+import os
 import re
-import yaml
+from pathlib import Path
 
+import yaml
 import pandas as pd
 import numpy as np
 
-intermediate_path = "/work/pi_plunkett_umass_edu/bcu/data/processed/osm/"
+# Use the configured external data root when available. Otherwise, fall
+# back to a repository-relative data directory for portable local use.
+intermediate_path = str(
+    Path(os.environ.get("BIKE_DATA_ROOT", "."))
+    / "data"
+    / "processed"
+    / "osm"
+)
 SIDES = ['left', 'right']
 DIRS = ['fwd', 'rev']
 

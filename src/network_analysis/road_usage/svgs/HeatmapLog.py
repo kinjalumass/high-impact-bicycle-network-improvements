@@ -1,3 +1,4 @@
+import os
 import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -7,9 +8,19 @@ import numpy as np
 import argparse
 from pathlib import Path
 
-def loadgraph(graph_path='/work/pi_plunkett_umass_edu/bcu/data/processed/road_usage_analysis/', graph_file="boston_only_usage.graphml"):
+def loadgraph(graph_path=None, graph_file="boston_only_usage.graphml"):
+    if graph_path is None:
+        graph_path = (
+            Path(os.environ.get("BIKE_DATA_ROOT", "."))
+            / "data"
+            / "processed"
+            / "road_usage_analysis"
+        )
+    else:
+        graph_path = Path(graph_path)
+
     print("Loading graph...")
-    G = nx.read_graphml(f"{graph_path}{graph_file}")
+    G = nx.read_graphml(graph_path / graph_file)
     print(f"Nodes: {G.number_of_nodes():,}")
     print(f"Edges: {G.number_of_edges():,}")
 
