@@ -96,7 +96,7 @@ On the routing benchmark:
 
 * both algorithms returned the same optimal route costs for routable OD pairs
 * A* generally expanded fewer nodes
-* A* generally ran faster while preserving optimality.
+* A* generally ran faster while preserving optimality
 
 ### UCS vs. A* Validation
 
@@ -138,11 +138,11 @@ Twenty candidates were retained, and the strongest ten were evaluated using full
 
 For each candidate:
 
-1. its LTS was reduced to 2;
-2. rider-specific edge costs were updated;
-3. the full modeled demand set was rerouted;
-4. new routes were compared with baseline routes;
-5. demand-weighted generalized-cost reduction was calculated.
+1. its LTS was reduced to 2
+2. rider-specific edge costs were updated
+3. the full modeled demand set was rerouted
+4. new routes were compared with baseline routes
+5. demand-weighted generalized-cost reduction was calculated
 
 ## Top Individual Interventions
 
@@ -177,11 +177,11 @@ Instead, the project uses greedy optimization.
 
 At every round:
 
-1. each remaining candidate is added temporarily to the existing package;
-2. the full OD set is rerouted;
-3. the total package benefit is recomputed;
-4. marginal benefit is calculated;
-5. the highest-marginal-benefit candidate is selected.
+1. each remaining candidate is added temporarily to the existing package
+2. the full OD set is rerouted
+3. the total package benefit is recomputed
+4. marginal benefit is calculated
+5. the highest-marginal-benefit candidate is selected
 
 ### Optimization Constraint
 
@@ -272,7 +272,7 @@ Important limitations include:
 * optimization is constrained to five projects rather than a monetary budget
 * network topology remains fixed
 * rider preferences are represented by predefined LTS weights
-* optimization occurs within the generated candidate set rather than over every possible infrastructure project.
+* optimization occurs within the generated candidate set rather than over every possible infrastructure project
 
 ## Repository Structure
 
