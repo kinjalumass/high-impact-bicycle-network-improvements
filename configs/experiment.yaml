@@ -130,9 +130,7 @@ candidate_generation:
 intervention_evaluation:
   maximum_full_simulations: 10
 
-  # The approved proposal specifies lowering LTS for simulated
-  # improvements but does not itself fix one universal target LTS.
-  # We will define and document the intervention rule before Stage E.
+  # Simulated improvements lower eligible candidate segments to LTS 2.
   target_lts: 2
 
   reroute_after_intervention: true
@@ -196,4 +194,4 @@ outputs:
   intervention_directory: "results/interventions"
   optimization_directory: "results/optimization"
   robustness_directory: "results/robustness"
-  figure_directory: "results/figures"
+  figure_directory: "reports/figures"

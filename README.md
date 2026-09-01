@@ -140,9 +140,9 @@ The typical-adult baseline contains 13,696 used LTS 3–4 directed edges. Figure
 
 ## Candidate Generation
 
-Twenty candidate high-stress segments were generated using modeled demand and stress exposure.
+Candidate screening was restricted to homogeneous LTS 3–4 simplified segments. Most shortlist positions were assigned using preliminary demand-weighted stress benefit, while a five-position connectivity reserve ensured that direct bridges between distinct LTS 1–2 network components were also considered.
 
-The strongest ten candidates were evaluated using full intervention simulations.
+Twenty candidates were retained, and the strongest ten were evaluated using full intervention simulations.
 
 For each candidate:
 
@@ -266,7 +266,7 @@ The results suggest three main conclusions.
 
 First, bicycle-infrastructure value is a network effect. Local demand or LTS alone does not determine the value of an intervention.
 
-Second, the baseline optimized package is highly robust to changes in the sampled OD demand.
+Second, the baseline optimized package remained stable under the independent alternate OD sample tested.
 
 Third, infrastructure rankings depend materially on assumptions about rider stress sensitivity. More strongly stress-averse riders shift the relative importance of several projects.
 
@@ -350,4 +350,4 @@ reports/final_report.md
 **C004 — Beacon Street**
 **C006 — Dartmouth Street**
 
-The experiments indicate that this package provides strong modeled network-wide benefit across rider profiles and remains exceptionally stable under alternate OD sampling.
+The experiments indicate that this package provides strong modeled network-wide benefit across rider profiles and was reproduced exactly under the independent alternate OD sample tested.
