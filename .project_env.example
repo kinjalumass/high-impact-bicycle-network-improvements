@@ -1,0 +1,6 @@
+# Copy this file to .project_env and replace the root path
+# with the location of the project data on your system.
+
+export BIKE_DATA_ROOT="/path/to/project-data"
+export BIKE_FINAL_ROOT="$BIKE_DATA_ROOT/final"
+export BIKE_COURSE_ROOT="$BIKE_DATA_ROOT/course_project"
