@@ -4,6 +4,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from bike_improvements.project_paths import course_root, final_root
+
 from network_analysis.od_generation.build_poi_od_pairs import (
     build_poi_od_pairs,
 )
@@ -18,13 +20,12 @@ from network_analysis.od_generation.lodes_sampling import (
 
 SEED = 684
 
-FINAL = Path(
-    "/work/pi_plunkett_umass_edu/bcu/final"
-)
+FINAL = final_root()
 
-OUT = Path(
-    "/work/pi_plunkett_umass_edu/bcu/"
-    "course_project/robustness/od_seed_684"
+OUT = (
+    course_root()
+    / "robustness"
+    / "od_seed_684"
 )
 
 GRAPH = (

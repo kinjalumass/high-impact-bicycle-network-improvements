@@ -7,10 +7,10 @@ from pathlib import Path
 import pandas as pd
 from scipy.stats import spearmanr
 
+from bike_improvements.project_paths import course_root
 
-COURSE = Path(
-    "/work/pi_plunkett_umass_edu/bcu/course_project"
-)
+
+COURSE = course_root()
 
 OUT = Path("results/robustness")
 

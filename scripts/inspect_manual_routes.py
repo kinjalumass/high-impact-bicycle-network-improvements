@@ -10,6 +10,8 @@ import networkx as nx
 import osmnx as ox
 import pandas as pd
 
+from bike_improvements.project_paths import final_root
+
 from bike_improvements.routing import (
     astar_shortest_path,
     prepare_routing_graph,
@@ -17,10 +19,12 @@ from bike_improvements.routing import (
 )
 
 
-DEFAULT_GRAPH = (
-    "/work/pi_plunkett_umass_edu/bcu/final/output/"
-    "cost_scenarios/cost_scenario_1/"
-    "greater_boston_cost_scenario_1_simplified.graphml"
+DEFAULT_GRAPH = str(
+    final_root()
+    / "output"
+    / "cost_scenarios"
+    / "cost_scenario_1"
+    / "greater_boston_cost_scenario_1_simplified.graphml"
 )
 
 RESULTS = Path("results/routing")

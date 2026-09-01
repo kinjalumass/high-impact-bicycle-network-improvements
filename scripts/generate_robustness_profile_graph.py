@@ -10,16 +10,20 @@ import osmnx as ox
 import pandas as pd
 import yaml
 
+from bike_improvements.project_paths import course_root, final_root
+
 from bike_improvements.baseline.profile_graph import (
     apply_profile_costs,
     simplify_profile_graph,
 )
 
 
-UNSIMPLIFIED = Path(
-    "/work/pi_plunkett_umass_edu/bcu/final/output/"
-    "cost_scenarios/cost_scenario_1/"
-    "greater_boston_cost_scenario_1.graphml"
+UNSIMPLIFIED = (
+    final_root()
+    / "output"
+    / "cost_scenarios"
+    / "cost_scenario_1"
+    / "greater_boston_cost_scenario_1.graphml"
 )
 
 COST_PARAMETERS = Path(
@@ -27,9 +31,10 @@ COST_PARAMETERS = Path(
     "cost_parameters.csv"
 )
 
-OUTPUT_DIR = Path(
-    "/work/pi_plunkett_umass_edu/bcu/course_project/"
-    "robustness/profile_graphs"
+OUTPUT_DIR = (
+    course_root()
+    / "robustness"
+    / "profile_graphs"
 )
 
 VALID_PROFILES = (

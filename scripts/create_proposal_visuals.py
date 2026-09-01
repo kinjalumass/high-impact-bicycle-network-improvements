@@ -14,6 +14,8 @@ import numpy as np
 import osmnx as ox
 import pandas as pd
 
+from bike_improvements.project_paths import course_root
+
 from bike_improvements.interventions.simulate import (
     apply_candidate_intervention,
 )
@@ -26,20 +28,25 @@ from bike_improvements.routing import (
 FIGURE_DIR = Path("reports/figures")
 FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 
-BASELINE_GRAPH = Path(
-    "/work/pi_plunkett_umass_edu/bcu/course_project/"
-    "profile_graphs/"
-    "greater_boston_typical_adult_scenario_11_simplified.graphml"
+BASELINE_GRAPH = (
+    course_root()
+    / "profile_graphs"
+    / "greater_boston_typical_adult_scenario_11_simplified.graphml"
 )
 
-EDGE_USAGE = Path(
-    "/work/pi_plunkett_umass_edu/bcu/course_project/"
-    "baselines/typical_adult/edge_usage.csv"
+EDGE_USAGE = (
+    course_root()
+    / "baselines"
+    / "typical_adult"
+    / "edge_usage.csv"
 )
 
-C001_COMPARISON = Path(
-    "/work/pi_plunkett_umass_edu/bcu/course_project/"
-    "interventions/C001/typical_adult/od_comparison.csv"
+C001_COMPARISON = (
+    course_root()
+    / "interventions"
+    / "C001"
+    / "typical_adult"
+    / "od_comparison.csv"
 )
 
 CANDIDATES = Path(

@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pandas as pd
 
+from bike_improvements.project_paths import course_root
 
-ROOT = Path(
-    "/work/pi_plunkett_umass_edu/bcu/course_project/interventions"
-)
+
+ROOT = course_root() / "interventions"
 
 OUT = Path("results/interventions")
 
