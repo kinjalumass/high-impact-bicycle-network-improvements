@@ -178,7 +178,8 @@ robustness:
     experienced_adult: 20
 
   second_fixed_od_sample: true
-  baseline_od_seed: 683
+  baseline_od_sample: "fixed_baseline"
+  baseline_od_seed_known: false
   second_od_seed: 684
 
   evaluate_ranking_stability: true

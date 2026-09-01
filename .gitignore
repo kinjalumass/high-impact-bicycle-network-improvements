@@ -39,3 +39,6 @@ results/interventions/intervention_output_manifest.csv
 
 # Local Unity data paths
 .project_env
+
+# Generated geocoding/network cache
+cache/

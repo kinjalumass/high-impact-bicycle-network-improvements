@@ -71,7 +71,9 @@ More stress-sensitive riders assign higher penalties to LTS 3 and LTS 4 roads.
 
 ## Data
 
-The analysis uses a Greater Boston bicycle-network graph derived from OpenStreetMap street-network data and Level of Traffic Stress information based on the StressMap methodology. The network is represented as a directed graph in which roadway segments have physical lengths, traffic-stress characteristics, and rider-specific generalized traversal costs.
+The street network is derived from OpenStreetMap. Level of Traffic Stress (LTS) values are computed from roadway attributes using the StressMap methodology and associated LTS rules. The network is represented as a directed graph in which roadway segments have physical lengths, traffic-stress characteristics, and rider-specific generalized traversal costs.
+
+The fixed modeled-demand dataset contains 50,000 trips across employment, school, healthcare, transit, greenspace, and store categories. Employment demand is derived from Census LODES origin-destination data. For non-employment demand, origins are sampled using population-weighted nodes across the four-municipality Greater Boston study area (Boston, Cambridge, Somerville, and Brookline), while destinations are derived from OpenStreetMap points of interest.
 
 The simplified routing graph contains approximately:
 
@@ -226,7 +228,7 @@ Two robustness experiments were performed.
 
 ### Alternate OD Sample
 
-A second fixed OD sample was generated using seed 684 instead of seed 683.
+A second independently generated fixed OD sample using seed 684 was compared with the fixed baseline OD sample.
 
 Results were highly stable:
 

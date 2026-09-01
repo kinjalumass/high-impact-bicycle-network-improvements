@@ -201,7 +201,7 @@ This demonstrates that the principal modeled benefit is stress reduction rather 
 ## 10. Robustness Analysis
 Two sensitivity experiments were conducted.
 ### 10.1 Alternate OD Sample
-A second fixed demand sample was generated using random seed 684 instead of the baseline seed 683 while preserving the same total demand and category totals.
+A second independently generated fixed demand sample using random seed 684 was compared with the fixed baseline demand sample while preserving the same total demand and category totals.
 The alternate sample was substantially different at the individual OD-pair level, providing a meaningful test of whether the results depended on one particular random sample.
 ### 10.2 Higher Rider Stress Aversion
 A second experiment used more strongly stress-averse cost scenarios for every rider profile:
