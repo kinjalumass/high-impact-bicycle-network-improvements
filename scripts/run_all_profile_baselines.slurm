@@ -7,18 +7,28 @@
 #SBATCH --mem=32G
 #SBATCH --time=02:00:00
 #SBATCH --array=0-3
-#SBATCH --output=/work/pi_plunkett_umass_edu/bcu/course_project/slurm_logs/baseline-%A_%a.out
-#SBATCH --error=/work/pi_plunkett_umass_edu/bcu/course_project/slurm_logs/baseline-%A_%a.err
+#SBATCH --output=slurm-%x-%j.out
+#SBATCH --error=slurm-%x-%j.err
 
 set -euo pipefail
 
 module load conda/latest
 
-REPO="$HOME/high-impact-bicycle-network-improvements"
-DATA="/work/pi_plunkett_umass_edu/bcu/final"
-COURSE="/work/pi_plunkett_umass_edu/bcu/course_project"
+REPO="${BIKE_REPO_ROOT:-$HOME/high-impact-bicycle-network-improvements}"
+DATA="$BIKE_FINAL_ROOT"
+COURSE="$BIKE_COURSE_ROOT"
 
 cd "$REPO"
+
+# Load machine-specific data locations when a local configuration exists.
+if [[ -f "$REPO/.project_env" ]]; then
+  # shellcheck disable=SC1091
+  source "$REPO/.project_env"
+fi
+
+: "${BIKE_DATA_ROOT:?Set BIKE_DATA_ROOT or configure .project_env}"
+: "${BIKE_FINAL_ROOT:?Set BIKE_FINAL_ROOT or configure .project_env}"
+: "${BIKE_COURSE_ROOT:?Set BIKE_COURSE_ROOT or configure .project_env}"
 
 export PYTHONPATH="$REPO/src:${PYTHONPATH:-}"
 
