@@ -53,9 +53,7 @@ For the non-employment categories, home origins are sampled using node-level pop
 Under the baseline network, 45,568 of the 50,000 modeled demand units were routable, corresponding to a demand-weighted routing success rate of approximately 91.1%. Unroutable demand was retained as a property of network topology rather than altered by the cost-only interventions evaluated here.
 ## 3. Rider-Specific Generalized Cost
 Shortest physical distance alone is insufficient for modeling bicycle-route preference because riders may accept additional distance to avoid stressful roads.
-For an edge $e$, generalized traversal cost is modeled as:
-$$\mathrm{Cost}(e) = \mathrm{Length}(e) \times \mathrm{StressWeight}(\mathrm{LTS}(e))$$
-where the stress weight depends on the rider profile.
+Generalized traversal cost for each road segment is calculated by multiplying its physical length by the stress weight assigned to its LTS level. The stress weight depends on the rider profile.
 Four rider profiles were evaluated:
 - Child: strongest baseline aversion to high-stress links
 - Low-confidence adult: similarly strong avoidance of stressful infrastructure
@@ -256,7 +254,7 @@ Several conclusions emerge from the experiments.
 First, infrastructure benefit is a network effect. A candidate's importance cannot be determined reliably from its local stress level or local demand alone. Full rerouting captures how an improvement changes the set of attractive routes across the network.
 Second, more stress-sensitive rider profiles receive the largest modeled benefits from the selected improvements. The final five-project package particularly benefits child and low-confidence profiles because higher-stress segments carry greater penalties for those riders.
 Third, the strongest candidates were stable under the alternate OD sample tested. The alternate OD experiment reproduced the same top-five candidate set and the exact same optimized five-project package.
-Fourth, rider-behavior assumptions matter substantially. More severe stress aversion changed both individual rankings and the final optimized package. This is not a failure of the framework; rather, it identifies an important planning uncertainty. Infrastructure priorities depend partly on whose routing preferences the system is intended to support.
+Fourth, rider-behavior assumptions matter substantially. More severe stress aversion changed both individual rankings and the final optimized package. This highlights an important planning uncertainty. Infrastructure priorities depend partly on whose routing preferences the system is intended to support.
 Finally, the selected package primarily reduces modeled traffic stress rather than physical travel distance. The network intervention can therefore provide meaningful modeled benefit even when trip distance stays nearly constant.
 ## 12. Limitations
 This study has several important limitations.
@@ -288,7 +286,7 @@ This project presents a reproducible graph-based approach for identifying high-i
 By combining Level of Traffic Stress, modeled travel demand, rider-specific routing preferences, optimal graph search, before-and-after intervention simulation, greedy package optimization, and robustness testing, the analysis moves beyond ranking stressful streets in isolation.
 The baseline analysis identified a five-project package consisting of improvements on Chauncy Street, Cambridge Street, Hyde Park Avenue, Beacon Street, and Dartmouth Street. Together, these interventions produced a mean demand-weighted generalized-cost reduction of approximately 361,774 across the four modeled rider profiles.
 The package was reproduced exactly under the independent alternate fixed OD sample tested, providing evidence that the result is not highly sensitive to that particular demand resampling. At the same time, stronger assumptions about riders' aversion to traffic stress changed the infrastructure priorities, demonstrating that behavioral assumptions remain an important source of uncertainty.
-Overall, the results show that network-wide routing analysis can provide a more informative basis for bicycle-infrastructure prioritization than stress, length, or demand measurements considered independently.
+Overall, the results show that evaluating how improvements affect routes across the network can provide more useful information for bicycle-infrastructure prioritization than considering stress, length, or demand on their own.
 ## Reproducibility
 The project repository contains:
 - experiment configuration files
