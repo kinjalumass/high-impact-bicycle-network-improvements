@@ -38,7 +38,7 @@ def stress_weight(
     """
     Return the profile-specific multiplier for an LTS value.
 
-    Unknown LTS and LTS 0 use the inherited BCU no-access penalty.
+    Unknown LTS and LTS 0 use the configured no-access penalty.
     """
     level = normalize_lts(lts_value)
 

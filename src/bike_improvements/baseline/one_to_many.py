@@ -31,7 +31,7 @@ def prepare_baseline_graph(G: nx.Graph):
     Build compact adjacency and edge-reference structures.
 
     For parallel edges, routing uses the minimum-cost edge, matching the
-    inherited BCU path-count implementation.
+    existing path-count implementation.
     """
     adjacency = {}
     edge_refs = []

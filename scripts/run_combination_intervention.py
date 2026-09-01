@@ -33,7 +33,7 @@ def find_target_lts(config: dict) -> int:
 def scenario_weights(
     scenario_id: int,
 ) -> dict[int, float]:
-    """Load inherited BCU LTS weights for one cost scenario."""
+    """Load LTS weights for one cost scenario."""
     path = Path(
         "src/bcu_analysis/graph_builder/config/"
         "cost_parameters.csv"
@@ -72,7 +72,7 @@ def main() -> None:
         type=int,
         default=None,
         help=(
-            "Optional inherited BCU cost scenario whose "
+            "Optional cost scenario whose "
             "LTS weights should be used for package "
             "intervention costs."
         ),
@@ -158,7 +158,7 @@ def main() -> None:
             args.weight_scenario
         )
         weight_source = (
-            f"BCU scenario {args.weight_scenario}"
+            f"scenario {args.weight_scenario}"
         )
 
     print(

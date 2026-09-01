@@ -51,7 +51,7 @@ def prepare_routing_graph(
     Convert a NetworkX graph into a compact routing structure.
 
     For MultiDiGraphs, the minimum-cost parallel edge between each ordered
-    pair of nodes is used, matching the behavior of the inherited BCU
+    pair of nodes is used, matching the behavior of the existing
     routing implementation.
     """
     adjacency: dict[Any, tuple[EdgeStep, ...]] = {}

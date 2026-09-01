@@ -12,7 +12,7 @@ Robustness experiments showed that this result was highly stable to resampling m
 A road segment with high bicycle stress is not automatically a high-priority infrastructure investment. Its practical importance depends on where it lies in the network, how many modeled trips encounter it or could benefit from it, what alternative routes exist, and how different classes of riders respond to traffic stress.
 This project asks:
 > **Which bicycle-network infrastructure improvements would produce the greatest modeled reduction in travel stress for riders in Greater Boston?**
-The project extends prior Boston Cyclists Union and UMass Center for Data Science graph-analysis infrastructure with a project-specific intervention framework. The primary additions are:
+The project develops a graph-based intervention-analysis framework that combines traffic-stress information, modeled travel demand, rider-specific routing costs, candidate improvement generation, before-and-after network simulation, and multi-project optimization. The primary additions are:
 - implementation and comparison of UCS and A* routing;
 - rider-profile-specific generalized routing costs;
 - generation of candidate infrastructure improvements;
@@ -22,7 +22,7 @@ The project extends prior Boston Cyclists Union and UMass Center for Data Scienc
 - robustness analysis under alternate demand and rider-behavior assumptions.
 The purpose is not to predict the exact real-world effect of construction. Instead, the framework provides a reproducible computational method for comparing candidate improvements according to their modeled ability to reduce bicycle travel stress across a large travel-demand sample.
 ## 2. Data and Network Representation
-The study uses a Greater Boston bicycle-network graph derived from OpenStreetMap-based network data developed through the broader Boston Cyclists Union analysis pipeline.
+The study uses a Greater Boston bicycle-network representation derived from OpenStreetMap street-network data and Level of Traffic Stress information based on the StressMap methodology.
 The simplified routing graph contains approximately 98,000 nodes and 280,000 directed edges. Each relevant road segment is associated with a Level of Traffic Stress value from 1 through 4:
 - LTS 1: lowest-stress conditions;
 - LTS 2: generally comfortable for a broader set of riders;

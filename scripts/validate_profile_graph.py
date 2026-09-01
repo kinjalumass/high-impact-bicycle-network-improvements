@@ -1,4 +1,4 @@
-"""Validate profile graph reconstruction against BCU scenario 1."""
+"""Validate profile graph reconstruction against reference scenario 1."""
 
 from __future__ import annotations
 

@@ -67,7 +67,7 @@ def main() -> None:
 
     records = []
 
-    # Child profile already exists as BCU scenario 1 and has been validated
+    # Child profile uses the validated scenario 1 graph
     # against our reconstruction code exactly.
     child = profiles["child"]
 
@@ -100,7 +100,7 @@ def main() -> None:
         print()
         print("=" * 72)
         print(f"Generating profile: {profile_name}")
-        print(f"Inherited scenario: {scenario_id}")
+        print(f"Scenario: {scenario_id}")
         print(f"Weights: {weights}")
         print("=" * 72)
 

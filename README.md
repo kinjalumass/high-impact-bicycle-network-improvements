@@ -71,7 +71,7 @@ More stress-sensitive riders assign higher penalties to LTS 3 and LTS 4 roads.
 
 ## Data
 
-The analysis uses the Greater Boston bicycle-network graph developed through the Boston Cyclists Union / UMass Center for Data Science analysis pipeline.
+The analysis uses a Greater Boston bicycle-network graph derived from OpenStreetMap street-network data and Level of Traffic Stress information based on the StressMap methodology. The network is represented as a directed graph in which roadway segments have physical lengths, traffic-stress characteristics, and rider-specific generalized traversal costs.
 
 The simplified routing graph contains approximately:
 
@@ -292,8 +292,8 @@ scripts/
     and figure generation
 
 src/bcu_analysis/
-    Reused Boston Cyclists Union / UMass
-    routing and graph-analysis infrastructure
+    Network construction, LTS processing, Census integration,
+    destination processing, OD-demand generation, and road-usage utilities
 
 src/bike_improvements/
     COMPSCI 683 project-specific implementation

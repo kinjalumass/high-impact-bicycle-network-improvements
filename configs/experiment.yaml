@@ -17,7 +17,7 @@ study_area:
 network:
   source: "OpenStreetMap"
   graph_type: "directed_multigraph"
-  lts_source: "BCU/StressMap LTS pipeline"
+  lts_source: "StressMap-derived LTS"
   edge_length_field: "length"
   edge_cost_field: "cost"
   simplified_lts_field: "max_lts"
@@ -26,7 +26,7 @@ network:
     formula: "edge_length * rider_profile_lts_weight"
 
 demand:
-  source: "BCU OD generation pipeline"
+  source: "modeled origin-destination demand"
   scenario_id: 1
   fixed_baseline_sample: true
 

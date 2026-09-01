@@ -31,7 +31,7 @@ def read_parse():
         parse_dict = yaml.safe_load(yml_file)
     return parse_dict
 
-# %% Reused Functions
+# %% LTS Processing Functions
 
 def apply_rules(gdf_edges, rating_dict, prefix):
     '''
