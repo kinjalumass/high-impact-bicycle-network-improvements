@@ -45,7 +45,7 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument(
         "--title",
-        default=("Greater Boston Census-Tract Accessibility, Demographics, and Regression Results — Excluding LTS 0"),
+        default=("Greater Boston Census-Tract Accessibility, Demographics, and Regression Results - Excluding LTS 0"),
     )
 
     return parser.parse_args()

@@ -1,23 +1,23 @@
 # Identifying High-Impact Bicycle Network Improvements
-**COMPSCI 683 — Artificial Intelligence**  
+**COMPSCI 683 - Artificial Intelligence**  
 **Kinjal Pandey**  
 **University of Massachusetts Amherst**
 ## Abstract
 Bicycle-network planning requires more than identifying streets that appear stressful in isolation. An infrastructure improvement is most valuable when it changes the routes that people can reasonably use and reduces the cumulative stress experienced across trips with meaningful travel demand. This project develops a graph-based framework for identifying high-impact bicycle-network improvements in Greater Boston using Level of Traffic Stress (LTS), modeled origin-destination demand, rider-specific stress preferences, and shortest-path search.
 The analysis represents the bicycle network as a directed graph and assigns each edge a generalized traversal cost equal to physical length multiplied by a rider-profile-specific LTS weight. Four rider profiles are modeled: child, low-confidence adult, typical adult, and experienced adult. Uniform-cost search (UCS) and A* are used for route computation, and one-to-many routing is used to evaluate the full modeled demand dataset efficiently.
 Twenty candidate high-stress segments were generated using modeled demand and stress exposure. The ten strongest candidates were then evaluated through full before-and-after network simulations in which each candidate's LTS was reduced to 2 and all affected routes were recomputed. Chauncy Street ranked first as an individual intervention, followed by Cambridge Street and Hyde Park Avenue.
-A greedy optimization procedure was subsequently used to select a five-project package. Rather than adding isolated candidate benefits, every optimization round rerouted the complete demand set after applying the current package. The final baseline package consisted of C001 Chauncy Street, C002 Cambridge Street, C003 Hyde Park Avenue, C004 Beacon Street, and C006 Dartmouth Street. Its mean demand-weighted generalized-cost reduction across rider profiles was 361,774.05, over approximately 779.67 meters of candidate infrastructure.
+A greedy procedure was then used to build a five-project package. At each round, the network was rerouted after applying the current package so that the next candidate was evaluated by its additional benefit. The final baseline package consisted of C001 Chauncy Street, C002 Cambridge Street, C003 Hyde Park Avenue, C004 Beacon Street, and C006 Dartmouth Street. Its mean demand-weighted generalized-cost reduction across rider profiles was 361,774.05, over approximately 779.67 meters of candidate infrastructure.
 Robustness experiments showed that the result was stable under the independent alternate modeled-demand sample tested but more sensitive to assumptions about rider stress aversion. The alternate fixed OD sample reproduced the same five-project package exactly and produced only a 0.137% change in the final generalized-cost benefit. Stronger LTS aversion produced a different five-project package with three of the five baseline projects retained. These findings provide evidence that the result is not highly sensitive to the particular alternate demand sample tested while emphasizing the importance of behavioral assumptions about how strongly riders avoid stressful infrastructure.
 ## 1. Introduction
 A road segment with high bicycle stress is not automatically a high-priority infrastructure investment. Its practical importance depends on where it lies in the network, how many modeled trips encounter it or could benefit from it, what alternative routes exist, and how different classes of riders respond to traffic stress.
 This project asks:
 > **Which bicycle-network infrastructure improvements would produce the greatest modeled reduction in travel stress for riders in Greater Boston?**
 The project develops a graph-based intervention-analysis framework that combines traffic-stress information, modeled travel demand, rider-specific routing costs, candidate improvement generation, before-and-after network simulation, and multi-project optimization. The primary additions are:
-- implementation and comparison of UCS and A* routing;
-- rider-profile-specific generalized routing costs;
-- generation of candidate infrastructure improvements;
-- full before-and-after network simulations;
-- demand-weighted intervention scoring;
+- implementation and comparison of UCS and A* routing
+- rider-profile-specific generalized routing costs
+- generation of candidate infrastructure improvements
+- full before-and-after network simulations
+- demand-weighted intervention scoring
 - greedy multi-project optimization; and
 - robustness analysis under alternate demand and rider-behavior assumptions.
 The purpose is not to predict the exact real-world effect of construction. Instead, the framework provides a reproducible computational method for comparing candidate improvements according to their modeled ability to reduce bicycle travel stress across a large travel-demand sample.
@@ -30,16 +30,16 @@ Each roadway edge has a physical length and an LTS value. Rider-specific travers
 The original directed network is simplified for routing by merging chains of roadway edges between intersections. Physical length and generalized traversal cost are summed across constituent edges, while the worst relevant LTS value is retained for the merged segment. The resulting routing graph contains approximately 98,168 nodes and 279,932 directed edges.
 
 LTS values are interpreted as:
-- LTS 1: lowest-stress conditions;
-- LTS 2: generally comfortable for a broader set of riders;
-- LTS 3: higher-stress conditions;
+- LTS 1: lowest-stress conditions
+- LTS 2: generally comfortable for a broader set of riders
+- LTS 3: higher-stress conditions
 - LTS 4: highest-stress conditions.
 
 The fixed modeled-demand dataset contains 50,000 trips across six categories:
-- 20,000 employment trips;
-- 20,000 school trips;
-- 3,000 healthcare trips;
-- 2,000 transit trips;
+- 20,000 employment trips
+- 20,000 school trips
+- 3,000 healthcare trips
+- 2,000 transit trips
 - 2,000 greenspace trips; and
 - 3,000 store trips.
 
@@ -54,9 +54,9 @@ For an edge $e$, generalized traversal cost is modeled as:
 $$\mathrm{Cost}(e) = \mathrm{Length}(e) \times \mathrm{StressWeight}(\mathrm{LTS}(e))$$
 where the stress weight depends on the rider profile.
 Four rider profiles were evaluated:
-- Child: strongest baseline aversion to high-stress links;
-- Low-confidence adult: similarly strong avoidance of stressful infrastructure;
-- Typical adult: moderate stress sensitivity;
+- Child: strongest baseline aversion to high-stress links
+- Low-confidence adult: similarly strong avoidance of stressful infrastructure
+- Typical adult: moderate stress sensitivity
 - Experienced adult: lowest modeled aversion to higher LTS.
 Edges representing unavailable or inappropriate bicycle access receive a very high traversal weight so that they are avoided when feasible alternatives exist.
 This formulation allows the routing algorithms to select longer but lower-stress paths when their generalized cost is lower.
@@ -70,7 +70,7 @@ A deterministic benchmark compared UCS and A* on 100 identical origin-destinatio
 
 | Metric | UCS | A* | A* reduction |
 |---|---:|---:|---:|
-| Routable pairs | 93 | 93 | — |
+| Routable pairs | 93 | 93 | - |
 | Mean runtime, all pairs | 0.05885 s | 0.05175 s | 12.1% |
 | Median runtime, all pairs | 0.02056 s | 0.01099 s | 46.5% |
 | Mean nodes expanded | 19,799.55 | 12,033.43 | 39.2% |
@@ -120,14 +120,14 @@ This visualization makes the geographic overlap between stressful infrastructure
 The candidate-generation stage screened the bicycle network for high-stress road segments with substantial modeled demand-weighted stress exposure. Candidates were restricted to homogeneous LTS 3–4 simplified segments; most shortlist positions were assigned by preliminary demand-weighted stress benefit, while a five-position reserve ensured that direct bridges between distinct LTS 1–2 network components were also considered.
 Twenty candidates were retained for screening. The strongest ten were advanced to computationally expensive full-intervention simulations.
 The top ten represented streets including:
-- Chauncy Street;
-- Cambridge Street;
-- Hyde Park Avenue;
-- Beacon Street;
-- Dartmouth Street;
-- Longwood Avenue;
-- Pond Street;
-- South Service Road;
+- Chauncy Street
+- Cambridge Street
+- Hyde Park Avenue
+- Beacon Street
+- Dartmouth Street
+- Longwood Avenue
+- Pond Street
+- South Service Road
 - Columbia Road; and
 - Massachusetts Avenue.
 Nine of the ten fully simulated candidates had baseline LTS 3, while South Service Road had LTS 4.
@@ -138,9 +138,9 @@ The geographic figure shows representative candidate locations and highlights pr
 ## 7. Full Intervention Simulation
 Candidate evaluation was not based solely on local properties such as segment demand or length.
 For each of the top ten candidates:
-- the candidate's LTS was reduced to 2;
-- the corresponding rider-specific edge cost was recomputed;
-- the complete modeled OD demand set was rerouted;
+- the candidate's LTS was reduced to 2
+- the corresponding rider-specific edge cost was recomputed
+- the complete modeled OD demand set was rerouted
 - intervention routes were compared with baseline routes; and
 - demand-weighted generalized-cost reduction was calculated.
 This provides an estimate of network-wide modeled benefit rather than simply measuring the improved edge itself.
@@ -179,9 +179,9 @@ The ranking also illustrates why full simulation matters. For example, a segment
 Selecting the five highest-ranked individual interventions would assume that their benefits are independent. In a transportation network, this assumption is not generally valid. Improving one segment can alter routes and therefore change the marginal value of subsequent improvements.
 A greedy optimization procedure was therefore used.
 At each step:
-- all remaining candidates were temporarily added to the already-selected package one at a time;
-- the complete OD dataset was rerouted for every rider profile;
-- the total package benefit was recomputed;
+- all remaining candidates were temporarily added to the already-selected package one at a time
+- the complete OD dataset was rerouted for every rider profile
+- the total package benefit was recomputed
 - the marginal benefit relative to the previous package was calculated; and
 - the remaining candidate with the largest marginal benefit was selected.
 The optimization was constrained to a maximum of five projects. The original proposal contemplated either a project-count limit or a cumulative improved-road-length limit. The final implementation uses the project-count constraint because physical road length alone is not a credible proxy for implementation cost: projects of similar length can differ substantially in intersection treatment, right-of-way requirements, engineering complexity, and construction requirements. Because a credible project-specific construction-cost model was not available, cumulative candidate length is reported descriptively and used only as a lower-priority tie-breaker rather than imposed as a hard optimization budget.
@@ -192,11 +192,11 @@ The optimization was constrained to a maximum of five projects. The original pro
 The selected projects were:
 | Step | Selected candidate | Package mean benefit | Marginal benefit |
 |---:|---|---:|---:|
-| 1 | C001 — Chauncy Street | 93,316.79 | 93,316.79 |
-| 2 | C002 — Cambridge Street | 178,121.57 | 84,804.78 |
-| 3 | C003 — Hyde Park Avenue | 253,261.05 | 75,139.48 |
-| 4 | C004 — Beacon Street | 308,539.49 | 55,278.44 |
-| 5 | C006 — Dartmouth Street | 361,774.05 | 53,234.57 |
+| 1 | C001 - Chauncy Street | 93,316.79 | 93,316.79 |
+| 2 | C002 - Cambridge Street | 178,121.57 | 84,804.78 |
+| 3 | C003 - Hyde Park Avenue | 253,261.05 | 75,139.48 |
+| 4 | C004 - Beacon Street | 308,539.49 | 55,278.44 |
+| 5 | C006 - Dartmouth Street | 361,774.05 | 53,234.57 |
 
 The final package was therefore:
 **C001 + C002 + C003 + C004 + C006**
@@ -223,9 +223,9 @@ A second independently generated fixed demand sample using random seed 684 was c
 The alternate sample was substantially different at the individual OD-pair level, providing a meaningful test of whether the results depended on one particular random sample.
 ### 10.2 Higher Rider Stress Aversion
 A second experiment used more strongly stress-averse cost scenarios for every rider profile:
-- child: scenario 5;
-- low-confidence adult: scenario 10;
-- typical adult: scenario 15;
+- child: scenario 5
+- low-confidence adult: scenario 10
+- typical adult: scenario 15
 - experienced adult: scenario 20.
 Candidate simulations and the entire greedy optimization process were rerun under each robustness condition.
 ### 10.3 Stability Results
@@ -245,7 +245,7 @@ The alternate-sample package produced a mean generalized-cost reduction of 361,2
 This suggests that the identified priority package is not an artifact of the particular fixed OD sample used for the main experiment.
 The higher-stress-aversion experiment was more sensitive. Its optimized package was:
 **C001 + C006 + C002 + C005 + C008**
-Three projects—C001, C002, and C006—were shared with the baseline five-project package.
+Three projects - C001, C002, and C006 - were shared with the baseline five-project package.
 The high-aversion experiment also had a lower candidate-rank Spearman correlation of approximately 0.467. This means infrastructure priorities change meaningfully when riders are assumed to penalize high-stress roads more strongly.
 The numerical benefit magnitude from the high-aversion experiment should not be directly compared with baseline benefit because changing LTS weights changes the generalized-cost scale itself. Package composition and relative ranking are the more appropriate sensitivity measures for this experiment.
 ## 11. Discussion
@@ -272,7 +272,7 @@ Consequently, currently unreachable OD pairs remain unreachable.
 Rider profiles are represented through predetermined LTS weights. Actual cyclists exhibit heterogeneous preferences that may vary with age, trip purpose, time of day, infrastructure type, and other factors.
 The robustness analysis demonstrates that results can change when these assumptions change.
 ### 12.6 Candidate Scope
-The optimization operates on the generated candidate set rather than every theoretically possible infrastructure project in Greater Boston. The final package is therefore optimal only within the evaluated greedy candidate-selection framework, not a claim of globally optimal real-world investment.
+The optimization operates on the generated candidate set rather than every theoretically possible infrastructure project in Greater Boston. The final package is the result of the greedy procedure applied to the evaluated candidate set. It should not be interpreted as the globally optimal set of real-world investments.
 ## 13. Future Work
 Several extensions would strengthen the framework.
 First, project-specific construction-cost estimates could support budget-constrained optimization and benefit-per-dollar comparisons.
@@ -288,15 +288,15 @@ The package was reproduced exactly under the independent alternate fixed OD samp
 Overall, the results show that network-wide routing analysis can provide a more informative basis for bicycle-infrastructure prioritization than stress, length, or demand measurements considered independently.
 ## Reproducibility
 The project repository contains:
-- experiment configuration files;
-- UCS and A* routing implementations;
-- rider-profile graph construction;
-- baseline-routing scripts;
-- candidate-generation methods;
-- intervention-simulation scripts;
-- greedy optimization;
-- robustness experiments;
-- tests;
+- experiment configuration files
+- UCS and A* routing implementations
+- rider-profile graph construction
+- baseline-routing scripts
+- candidate-generation methods
+- intervention-simulation scripts
+- greedy optimization
+- robustness experiments
+- tests
 - generated result tables; and
 - final visualization scripts.
-All reported numerical results are generated from committed experiment outputs in the results/ directory. Report Figures 1–6 are generated by scripts/create_final_figures.py, while Figures 7–8 are generated by scripts/create_proposal_visuals.py from the configured stored project-data artifacts.
+The aggregate experiment results used in this report are stored in the committed `results/` directory. Metadata specific to Figures 7 and 8 is stored in `reports/figures/proposal_visual_metadata.csv`. Figures 1 through 6 are generated by `scripts/create_final_figures.py`. Regenerating Figures 7 and 8 requires the configured stored project-data artifacts and `scripts/create_proposal_visuals.py`.

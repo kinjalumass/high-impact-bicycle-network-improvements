@@ -1,13 +1,13 @@
 # Identifying High-Impact Bicycle Network Improvements
 
-COMPSCI 683 — Artificial Intelligence
+COMPSCI 683 - Artificial Intelligence
 University of Massachusetts Amherst
 
 ## Overview
 
 This project develops a graph-based framework for identifying high-impact bicycle infrastructure improvements in Greater Boston.
 
-Rather than ranking stressful streets in isolation, the method evaluates how improving a road segment changes bicycle routes across the network. It combines:
+The analysis looks at how each potential road improvement affects routes across the full network. It uses:
 
 * Level of Traffic Stress (LTS)
 * modeled origin-destination demand
@@ -26,21 +26,21 @@ The central research question is:
 
 The baseline optimization selected the following five-project package:
 
-1. **C001 — Chauncy Street**
-2. **C002 — Cambridge Street**
-3. **C003 — Hyde Park Avenue**
-4. **C004 — Beacon Street**
-5. **C006 — Dartmouth Street**
+1. **C001 - Chauncy Street**
+2. **C002 - Cambridge Street**
+3. **C003 - Hyde Park Avenue**
+4. **C004 - Beacon Street**
+5. **C006 - Dartmouth Street**
 
 The package produced a mean demand-weighted generalized-cost reduction of approximately:
 
-**361,774**
+361,774
 
 across the four modeled rider profiles.
 
 Its cumulative candidate length was approximately:
 
-**779.67 meters**
+779.67 meters
 
 ![Greedy optimization progression](reports/figures/03_greedy_package_progression.png)
 
@@ -48,15 +48,7 @@ Its cumulative candidate length was approximately:
 
 Shortest physical distance alone does not represent bicycle route preference well because cyclists may choose longer routes to avoid stressful roads.
 
-For edge \(e\):
-
-$$
-\mathrm{Cost}(e)
-=
-\mathrm{Length}(e)
-\times
-\mathrm{StressWeight}(\mathrm{LTS}(e))
-$$
+Each road segment's routing cost is calculated by multiplying its physical length by the stress weight assigned to its LTS level.
 
 Four rider profiles are modeled:
 
@@ -77,15 +69,15 @@ The fixed modeled-demand dataset contains 50,000 trips across employment, school
 
 The simplified routing graph contains approximately:
 
-* **98,168 nodes**
-* **279,932 directed edges**
+* 98,168 nodes
+* 279,932 directed edges
 
 The modeled demand dataset contains approximately:
 
-* **42,294 OD records**
-* **50,000 total modeled demand units**
-* **45,568 routed demand units**
-* **91.1% demand-weighted routing success**
+* 42,294 OD records
+* 50,000 total modeled demand units
+* 45,568 routed demand units
+* 91.1% demand-weighted routing success
 
 Demand includes trips to categories such as:
 
@@ -102,8 +94,8 @@ Both UCS and A* were implemented and benchmarked.
 
 On the routing benchmark:
 
-* both algorithms returned the same optimal route costs for routable OD pairs;
-* A* generally expanded fewer nodes;
+* both algorithms returned the same optimal route costs for routable OD pairs
+* A* generally expanded fewer nodes
 * A* generally ran faster while preserving optimality.
 
 ### UCS vs. A* Validation
@@ -112,7 +104,7 @@ A deterministic 100-pair benchmark verified both correctness and search efficien
 
 | Metric | UCS | A* | A* reduction |
 |---|---:|---:|---:|
-| Routable pairs | 93 | 93 | — |
+| Routable pairs | 93 | 93 | - |
 | Mean runtime | 0.05885 s | 0.05175 s | 12.1% |
 | Median runtime | 0.02056 s | 0.01099 s | 46.5% |
 | Mean nodes expanded | 19,799.55 | 12,033.43 | 39.2% |
@@ -173,7 +165,7 @@ For each candidate:
 
 ![Before and after routing for C001](reports/figures/08_before_after_route_example.png)
 
-For one actual typical-adult home-to-office OD record affected by **C001 — Chauncy Street**, generalized route cost decreases from **9,148.81 to 9,073.39** after intervention. The preferred route changes from **3,381.89 m / 101 edges** to **3,744.08 m / 116 edges**.
+For one actual typical-adult home-to-office OD record affected by **C001 - Chauncy Street**, generalized route cost decreases from 9,148.81 to 9,073.39 after intervention. The preferred route changes from 3,381.89 m / 101 edges to 3,744.08 m / 116 edges.
 
 The example demonstrates an important feature of the model: the preferred post-intervention route can be physically longer while still having lower generalized cost because it provides a less stressful route.
 
@@ -232,11 +224,11 @@ A second independently generated fixed OD sample using seed 684 was compared wit
 
 Results were highly stable:
 
-* Spearman rank correlation: **0.976**
-* Top-5 candidate overlap: **5/5**
-* Optimized-package overlap: **5/5**
+* Spearman rank correlation: 0.976
+* Top-5 candidate overlap: 5/5
+* Optimized-package overlap: 5/5
 * Final optimized package: exactly the same as baseline
-* Final benefit change: approximately **-0.137%**
+* Final benefit change: approximately -0.137%
 
 ### Higher Stress Aversion
 
@@ -244,9 +236,9 @@ More strongly stress-averse rider profiles were also tested.
 
 Results were more sensitive:
 
-* Spearman rank correlation: **0.467**
-* Top-5 candidate overlap: **3/5**
-* Optimized-package overlap: **3/5**
+* Spearman rank correlation: 0.467
+* Top-5 candidate overlap: 3/5
+* Optimized-package overlap: 3/5
 
 The high-aversion optimized package was:
 
@@ -274,12 +266,12 @@ Third, infrastructure rankings depend materially on assumptions about rider stre
 
 Important limitations include:
 
-* demand is modeled rather than directly observed;
-* interventions are modeled as reducing existing-edge LTS to 2;
-* no construction-cost model is included;
-* optimization is constrained to five projects rather than a monetary budget;
-* network topology remains fixed;
-* rider preferences are represented by predefined LTS weights;
+* demand is modeled rather than directly observed
+* interventions are modeled as reducing existing-edge LTS to 2
+* no construction-cost model is included
+* optimization is constrained to five projects rather than a monetary budget
+* network topology remains fixed
+* rider preferences are represented by predefined LTS weights
 * optimization occurs within the generated candidate set rather than over every possible infrastructure project.
 
 ## Repository Structure
@@ -364,10 +356,10 @@ reports/final_report.md
 
 ## Final Optimized Package
 
-**C001 — Chauncy Street**
-**C002 — Cambridge Street**
-**C003 — Hyde Park Avenue**
-**C004 — Beacon Street**
-**C006 — Dartmouth Street**
+**C001 - Chauncy Street**
+**C002 - Cambridge Street**
+**C003 - Hyde Park Avenue**
+**C004 - Beacon Street**
+**C006 - Dartmouth Street**
 
 The experiments indicate that this package provides strong modeled network-wide benefit across rider profiles and was reproduced exactly under the independent alternate OD sample tested.
