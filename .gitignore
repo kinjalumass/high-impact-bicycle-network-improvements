@@ -36,3 +36,6 @@ Thumbs.db
 
 # Cluster-local intervention artifact manifest
 results/interventions/intervention_output_manifest.csv
+
+# Local Unity data paths
+.project_env
