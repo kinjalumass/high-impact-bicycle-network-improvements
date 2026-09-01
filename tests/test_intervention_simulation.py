@@ -2,6 +2,7 @@
 
 import networkx as nx
 import pandas as pd
+import pytest
 
 from bike_improvements.interventions.simulate import (
     apply_candidate_intervention,
@@ -106,3 +107,45 @@ def test_route_comparison_computes_weighted_benefit():
     assert row["cost_reduction"] == 150.0
     assert row["demand_weighted_cost_reduction"] == 750.0
     assert row["improved"]
+
+def test_route_comparison_rejects_extra_intervention_row():
+    baseline = pd.DataFrame(
+        [
+            {
+                "origin_node": "A",
+                "destination_node": "B",
+                "category": "home_school",
+                "demand": 5.0,
+                "found": True,
+                "status": "routed",
+                "route_cost": 300.0,
+                "route_distance": 100.0,
+                "route_edge_count": 1,
+            }
+        ]
+    )
+
+    intervention = pd.concat(
+        [
+            baseline.copy(),
+            pd.DataFrame(
+                [
+                    {
+                        **baseline.iloc[0].to_dict(),
+                        "destination_node": "C",
+                    }
+                ]
+            ),
+        ],
+        ignore_index=True,
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="OD row counts differ",
+    ):
+        compare_route_results(
+            baseline,
+            intervention,
+        )
+

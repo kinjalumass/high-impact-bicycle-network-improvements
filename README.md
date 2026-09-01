@@ -271,6 +271,7 @@ Important limitations include:
 * no construction-cost model is included
 * optimization is constrained to five projects rather than a monetary budget
 * network topology remains fixed
+* LTS 0 and unresolved-LTS edges use a large finite traversal penalty rather than being removed from the graph
 * rider preferences are represented by predefined LTS weights
 * optimization occurs within the generated candidate set rather than over every possible infrastructure project
 

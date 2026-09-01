@@ -195,6 +195,11 @@ def compare_route_results(
         }
     )
 
+    if len(i) != len(b):
+        raise ValueError(
+            "Baseline/intervention OD row counts differ."
+        )
+
     comparison = b.merge(
         i,
         on=ROUTE_KEYS,

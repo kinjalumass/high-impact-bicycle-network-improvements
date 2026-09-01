@@ -269,6 +269,7 @@ A practical planning application should incorporate project-specific cost estima
 ### 12.4 Fixed Network Topology
 The intervention analysis modifies stress and generalized cost on existing links. It does not add entirely new bicycle connections or alter the underlying topology.
 Consequently, currently unreachable OD pairs remain unreachable.
+LTS 0 and unresolved-LTS edges are assigned a large finite traversal penalty rather than being removed from the routing graph. They are therefore strongly discouraged, but they can theoretically be selected when no sufficiently lower-cost alternative exists.
 ### 12.5 Behavioral Assumptions
 Rider profiles are represented through predetermined LTS weights. Actual cyclists exhibit heterogeneous preferences that may vary with age, trip purpose, time of day, infrastructure type, and other factors.
 The robustness analysis demonstrates that results can change when these assumptions change.
