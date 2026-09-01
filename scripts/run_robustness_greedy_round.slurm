@@ -18,8 +18,6 @@ REMAINING="$3"
 ROUND="$4"
 
 REPO="${BIKE_REPO_ROOT:-$HOME/high-impact-bicycle-network-improvements}"
-FINAL="$BIKE_FINAL_ROOT"
-COURSE="$BIKE_COURSE_ROOT"
 
 cd "$REPO"
 
@@ -32,6 +30,9 @@ fi
 : "${BIKE_DATA_ROOT:?Set BIKE_DATA_ROOT or configure .project_env}"
 : "${BIKE_FINAL_ROOT:?Set BIKE_FINAL_ROOT or configure .project_env}"
 : "${BIKE_COURSE_ROOT:?Set BIKE_COURSE_ROOT or configure .project_env}"
+
+FINAL="$BIKE_FINAL_ROOT"
+COURSE="$BIKE_COURSE_ROOT"
 
 export PYTHONPATH="$REPO/src:${PYTHONPATH:-}"
 

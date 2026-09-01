@@ -42,3 +42,7 @@ results/interventions/intervention_output_manifest.csv
 
 # Generated geocoding/network cache
 cache/
+
+# Slurm job logs
+slurm-*.out
+slurm-*.err
