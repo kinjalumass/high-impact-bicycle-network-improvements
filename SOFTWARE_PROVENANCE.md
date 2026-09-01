@@ -1,6 +1,8 @@
-# Source Code Provenance
+# Software Provenance and Attribution
 
-This project builds upon code from the following repositories.
+This repository is methodologically self-contained: the README and final report describe the complete network construction, demand modeling, routing, intervention-analysis, optimization, and robustness methodology used for the COMPSCI 683 project.
+
+This file records software provenance and attribution for utilities that were adapted from prior work. It is not required to understand the analysis or reproduce the project methodology described in this repository.
 
 ## BCU Graph Analysis
 
