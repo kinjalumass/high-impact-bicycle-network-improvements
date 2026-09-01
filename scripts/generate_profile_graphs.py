@@ -74,7 +74,7 @@ def main() -> None:
     records.append(
         {
             "profile": "child",
-            "inherited_scenario_id": child["inherited_scenario_id"],
+            "scenario_id": child["scenario_id"],
             "graph_path": str(Path(args.child_reference).resolve()),
             "generated_by_course_project": False,
             "lts1_weight": child["lts_weights"][1],
@@ -90,7 +90,7 @@ def main() -> None:
         profile = profiles[profile_name]
         weights = profile_weights(profile)
 
-        scenario_id = profile["inherited_scenario_id"]
+        scenario_id = profile["scenario_id"]
 
         output_path = (
             output_dir
@@ -141,7 +141,7 @@ def main() -> None:
         records.append(
             {
                 "profile": profile_name,
-                "inherited_scenario_id": scenario_id,
+                "scenario_id": scenario_id,
                 "graph_path": str(output_path.resolve()),
                 "generated_by_course_project": True,
                 "lts1_weight": weights[1],
