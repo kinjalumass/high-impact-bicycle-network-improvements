@@ -319,10 +319,27 @@ Run the automated tests with:
 pytest -q
 ```
 
-The final report figures can be regenerated with:
+Scripts that access external project-data directories use `BIKE_DATA_ROOT`, `BIKE_FINAL_ROOT`, and `BIKE_COURSE_ROOT`. A template is provided in `.project_env.example`:
+
+```bash
+cp .project_env.example .project_env
+# Edit .project_env with the correct local data root.
+source .project_env
+```
+
+The local `.project_env` file is intentionally excluded from version control.
+
+Report Figures 1–6 can be regenerated from the committed result tables with:
 
 ```bash
 python scripts/create_final_figures.py
+```
+
+Figures 7–8 use stored project-data artifacts configured through `BIKE_COURSE_ROOT` and are generated with:
+
+```bash
+source .project_env
+python scripts/create_proposal_visuals.py
 ```
 
 Key result tables are stored under:
