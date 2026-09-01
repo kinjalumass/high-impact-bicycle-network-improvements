@@ -10,7 +10,7 @@ def load_graph(graph_path):
 
 def load_poi_data(poi_dir, area="boston"):
     """
-    Loads POI CSVs from /work/pi_plunkett_umass_edu/bcu/data/processed/osm.
+    Loads processed point-of-interest CSV files from the configured data directory.
     Combines all 4 municipalities if area is 'greater_boston'.
     """
     categories = ["Greenspaces", "Healthcare", "Office", "TransitStation"]

@@ -40,7 +40,7 @@ def main():
     # Argparser
     parser = argparse.ArgumentParser(description="Specify what regions to create a main csv for.")
     parser.add_argument("dataFolder", type=str, help="The path that all data comes from and where outputs are being stored.")
-    # Original dataFolder = '/work/pi_plunkett_umass_edu/bcu/data/processed/osm'
+    # Example processed OSM data directory
     parser.add_argument("region", type=str, help="The region being considered. (options: Boston, Brookline, Cambridge, Somerville, and All)")
     args = parser.parse_args()
     print("Working Under...")

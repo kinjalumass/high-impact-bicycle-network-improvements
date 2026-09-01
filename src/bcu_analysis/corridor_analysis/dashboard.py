@@ -3,7 +3,7 @@ from pathlib import Path
 from corridor_analysis import core_algorithms as core
 from corridor_analysis import export_utils as export
 
-st.set_page_config(page_title="Boston Cyclists Union - Network Islands", page_icon="🚲", layout="wide")
+st.set_page_config(page_title="Low-Stress Bicycle Network Islands", page_icon="🚲", layout="wide")
 
 st.title("🚲 Low-Stress Network Islands & Missing Link Corridors")
 st.markdown("This view isolates connected **LTS 1 & 2 safe zones**. Solid paths are algorithmically generated **Missing Link Corridors**.")

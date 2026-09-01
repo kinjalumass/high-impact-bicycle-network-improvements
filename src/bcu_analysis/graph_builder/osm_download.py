@@ -5,7 +5,7 @@ import requests
 import pandas as pd
 import osmnx as ox
 
-useragent = {"User-Agent": "bcu-labs"}
+useragent = {"User-Agent": "bicycle-network-analysis"}
 
 overpass_url = "https://overpass.kumi.systems/api/interpreter"
 

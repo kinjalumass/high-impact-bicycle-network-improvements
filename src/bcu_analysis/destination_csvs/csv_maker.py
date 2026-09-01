@@ -9,7 +9,7 @@ from shapely.ops import unary_union
 import time
 import argparse
 
-useragent = {'User-Agent': 'bcu-labs'}
+useragent = {'User-Agent': 'bicycle-network-analysis'}
 queryFolder = 'src/bcu_analysis/destination_csvs/query'
 overpass_url = "https://overpass-api.de/api/interpreter"
 OVERWRITE = False
@@ -306,7 +306,7 @@ def main(rebuild=False):
     # Argparser
     parser = argparse.ArgumentParser(description="Parameters to determine the type and filtering of destinations and the region being considered.")
     parser.add_argument("dataFolder", type=str, help="The path that all outputs are being stored.")
-    # Original dataFolder = '/work/pi_plunkett_umass_edu/bcu/data/processed/osm'
+    # Example processed OSM data directory
     parser.add_argument("region", type=str, help="The region being considered.(Options: Boston, Brookline, Cambridge, and Somerville)")
     args = parser.parse_args() 
     print("Working Under...")
