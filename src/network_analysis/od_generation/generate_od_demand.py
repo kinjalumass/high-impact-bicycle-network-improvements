@@ -16,14 +16,9 @@ DEFAULT_CONFIG_PATH = os.path.join(
     os.path.dirname(__file__), "config", "demand_parameters.csv"
 )
 
-# Node-level population weights, produced by the census_assignment stage. That stage has not
-# been migrated to the region_name/data_dir convention yet (it writes fixed Boston filenames),
-# so this default is Boston-only regardless of the area requested. Override with
-# --pop-geojson-path once region-specific files exist.
-DEFAULT_POP_GEOJSON = (
-    "/work/pi_plunkett_umass_edu/bcu/data/processed/census/results/"
-    "Boston_nodes_with_population_web.geojson"
-)
+# Population weights are resolved from the requested study region unless an
+# explicit node-level population file is supplied with --pop-geojson-path.
+DEFAULT_POP_GEOJSON = None
 
 
 def load_demand(scenario_id=1, config_path=DEFAULT_CONFIG_PATH):
@@ -101,6 +96,20 @@ def main(
         raise ValueError("data_dir is required.")
 
     region_name, cities = resolve_area(area)
+
+    if pop_geojson_path is None:
+        pop_geojson_path = os.path.join(
+            data_dir,
+            "census_results",
+            f"{region_name}_cost_scenario_{cost_scenario}_nodes_with_population_web.geojson",
+        )
+
+    if not os.path.exists(pop_geojson_path):
+        raise FileNotFoundError(
+            f"Population allocation not found: {pop_geojson_path}. "
+            "Provide the correct node-level population file with --pop-geojson-path."
+        )
+
     # Destinations.csv tags each row with a bare town name ('Boston'), while CITIES holds
     # full place names ('Boston, Massachusetts').
     towns = [name.split(",")[0].strip() for name, _, _ in cities]
@@ -209,7 +218,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--pop-geojson-path",
         default=DEFAULT_POP_GEOJSON,
-        help="Node-level population geojson used to weight POI home sampling (Boston-only today)",
+        help="Node-level population GeoJSON used to weight POI home sampling",
     )
     parser.add_argument(
         "--output-path",
