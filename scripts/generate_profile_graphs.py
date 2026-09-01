@@ -14,6 +14,7 @@ from bike_improvements.baseline.profile_graph import (
     simplify_profile_graph,
 )
 from bike_improvements.config import load_config
+from bike_improvements.project_paths import data_relative_path
 
 
 GENERATED_PROFILES = (
@@ -75,7 +76,7 @@ def main() -> None:
         {
             "profile": "child",
             "scenario_id": child["scenario_id"],
-            "graph_path": str(Path(args.child_reference).resolve()),
+            "graph_path": data_relative_path(args.child_reference),
             "generated_by_course_project": False,
             "lts1_weight": child["lts_weights"][1],
             "lts2_weight": child["lts_weights"][2],
@@ -142,7 +143,7 @@ def main() -> None:
             {
                 "profile": profile_name,
                 "scenario_id": scenario_id,
-                "graph_path": str(output_path.resolve()),
+                "graph_path": data_relative_path(output_path),
                 "generated_by_course_project": True,
                 "lts1_weight": weights[1],
                 "lts2_weight": weights[2],

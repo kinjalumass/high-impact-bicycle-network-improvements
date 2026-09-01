@@ -10,7 +10,7 @@ import osmnx as ox
 import pandas as pd
 import yaml
 
-from bike_improvements.project_paths import course_root, final_root
+from bike_improvements.project_paths import course_root, data_relative_path, final_root
 
 from bike_improvements.baseline.profile_graph import (
     apply_profile_costs,
@@ -167,7 +167,7 @@ def main() -> None:
                 "lts4_weight": weights[4],
                 "nodes": H.number_of_nodes(),
                 "edges": H.number_of_edges(),
-                "graph_path": str(output),
+                "graph_path": data_relative_path(output),
             }
         ]
     )

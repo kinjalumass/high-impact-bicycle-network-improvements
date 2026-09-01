@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from bike_improvements.project_paths import course_root
+from bike_improvements.project_paths import course_root, data_relative_path
 
 
 ROOT = course_root() / "baselines"
@@ -92,7 +92,7 @@ def main() -> None:
                 {
                     "rider_profile": profile,
                     "artifact": path.name,
-                    "path": str(path),
+                    "path": data_relative_path(path),
                     "size_bytes": path.stat().st_size,
                 }
             )
