@@ -141,7 +141,7 @@ I also calculated modeled roadway use from the baseline routes. For the typical-
 
 For the high-stress/high-use visualization, I defined heavily used segments as those at or above the 95th percentile of modeled baseline edge use. The threshold was a `path_count` of 136, yielding 690 highlighted directed edges representing 654 physical edge pairs.
 
-![Figure 1](../reports/figures/07_high_stress_high_demand_map.png)
+![Figure 1](../figures/07_high_stress_high_demand_map.png)
 
 Figure 1. Baseline high-stress roads carrying substantial modeled route load (`07_high_stress_high_demand_map.png`). The map distinguishes roads that are stressful but have relatively little modeled use from stressful streets that also carry substantial modeled travel demand.
 
@@ -169,7 +169,7 @@ Twenty candidates were retained. For each one, I recorded its location, physical
 
 The ten strongest screening candidates were advanced to full intervention simulation. Nine of those ten had baseline LTS 3, while South Service Road had baseline LTS 4.
 
-![Figure 2](../reports/figures/06_candidate_locations.png)
+![Figure 2](../figures/06_candidate_locations.png)
 
 Figure 2. Representative locations of the ten candidates advanced to full simulation (`06_candidate_locations.png`). Starred segments are those later selected into the final five-project package (Section 9).
 
@@ -196,7 +196,7 @@ For each rider profile, I calculated the total demand-weighted generalized-cost 
 | 9                                                               | C008 | Columbia Road        | 41,016.96 |
 | 10                                                              | C009 | Massachusetts Avenue | 39,577.98 |
 
-![Figure 3](../reports/figures/02_candidate_simulation_ranking.png)
+![Figure 3](../figures/02_candidate_simulation_ranking.png)
 
 Figure 3. Full-simulation ranking of the ten candidate improvements (`02_candidate_simulation_ranking.png`).
 
@@ -231,7 +231,7 @@ The two routes shared 75 directed edges. There were 26 baseline-only edges and 4
 
 The post-intervention route was therefore about 362 meters longer, while its generalized cost was about 75.42 lower.
 
-![Figure 4](../reports/figures/08_before_after_route_example.png)
+![Figure 4](../figures/08_before_after_route_example.png)
 
 Figure 4. Before-and-after route for one typical-adult OD record affected by C001 (`08_before_after_route_example.png`).
 
@@ -275,7 +275,7 @@ The proposal also called for testing practical limits of roughly three to five p
 | 4                                                                                               | C001 + C002 + C003 + C004        | 671.33 m | 308,539.49 |
 | 5                                                                                               | C001 + C002 + C003 + C004 + C006 | 779.67 m | 361,774.05 |
 
-![Figure 5](../reports/figures/03_greedy_package_progression.png)
+![Figure 5](../figures/03_greedy_package_progression.png)
 
 Figure 5. Greedy construction of the five-project package (`03_greedy_package_progression.png`). The cumulative package benefit increases at each step, while the annotations show the additional marginal benefit contributed by each selected project.
 
@@ -308,7 +308,7 @@ Because this value is an aggregate cost reduction summed over tens of thousands 
 | Typical adult                                                                                                                                                                                  | 320,866.11 | 0.129% | 2,196 | 38,425 | 2,342 | +1.35 m |
 | Experienced adult                                                                                                                                                                              | 118,385.58 | 0.053% | 1,863 | 38,425 | 1,995 | +0.73 m |
 
-![Figure 6](../reports/figures/04_final_package_by_profile.png)
+![Figure 6](../figures/04_final_package_by_profile.png)
 
 Figure 6. Demand-weighted generalized-cost reduction from the final five-project package by rider profile (`04_final_package_by_profile.png`).
 
@@ -353,7 +353,7 @@ C001 + C006 + C002 + C005 + C008
 
 The projects shared with the baseline package were C001, C002, and C006.
 
-![Figure 7](../reports/figures/05_robustness_summary.png)
+![Figure 7](../figures/05_robustness_summary.png)
 
 Figure 7. Ranking and package stability under the alternate OD sample and higher-stress-aversion experiment (`05_robustness_summary.png`).
 

@@ -23,7 +23,7 @@ The baseline optimization selected five modeled candidate segments:
 
 Together, the selected segments total approximately 779.67 meters. The package produced a mean demand-weighted generalized-cost reduction across the four modeled rider profiles of approximately 361,774.
 
-![Greedy optimization progression](reports/figures/03_greedy_package_progression.png)
+![Greedy optimization progression](figures/03_greedy_package_progression.png)
 
 ## Method at a Glance
 
@@ -56,7 +56,7 @@ src/network_analysis/    Reused/adapted network and demand utilities
 src/bike_improvements/   COMPSCI 683 project-specific analyses
 tests/                   Automated tests
 results/                 Committed aggregate experiment outputs
-reports/figures/         Generated figures
+figures/         Generated figures
 ```
 
 ## Key Results

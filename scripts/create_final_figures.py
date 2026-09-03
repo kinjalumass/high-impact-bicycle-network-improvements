@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 
 
-FIGURE_DIR = Path("reports/figures")
+FIGURE_DIR = Path("figures")
 FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 
 PROFILE_LABELS = {

@@ -25,7 +25,7 @@ from bike_improvements.routing import (
 )
 
 
-FIGURE_DIR = Path("reports/figures")
+FIGURE_DIR = Path("figures")
 FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 
 BASELINE_GRAPH = (

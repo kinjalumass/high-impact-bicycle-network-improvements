@@ -196,4 +196,4 @@ outputs:
   intervention_directory: "results/interventions"
   optimization_directory: "results/optimization"
   robustness_directory: "results/robustness"
-  figure_directory: "reports/figures"
+  figure_directory: "figures"
