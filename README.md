@@ -56,7 +56,7 @@ src/network_analysis/    Reused/adapted network and demand utilities
 src/bike_improvements/   COMPSCI 683 project-specific analyses
 tests/                   Automated tests
 results/                 Committed aggregate experiment outputs
-figures/         Generated figures
+figures/                 Generated figures
 ```
 
 ## Key Results

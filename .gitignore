@@ -27,9 +27,6 @@ results/intermediate/
 *.geojson
 *.pbf
 
-# Generated figures
-results/figures/
-
 # OS
 .DS_Store
 Thumbs.db
