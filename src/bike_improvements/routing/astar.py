@@ -58,10 +58,7 @@ def astar_shortest_path(
         if node_coord is None or target_coord is None:
             return 0.0
 
-        return (
-            great_circle_distance_m(node_coord, target_coord)
-            * graph.min_cost_per_meter
-        )
+        return great_circle_distance_m(node_coord, target_coord) * graph.min_cost_per_meter
 
     g_score = {source: 0.0}
     predecessor = {}
@@ -110,11 +107,7 @@ def astar_shortest_path(
 
             if tentative_g < g_score.get(v, math.inf):
                 g_score[v] = tentative_g
-                predecessor[v] = (
-                    u,
-                    edge.key,
-                    edge.length,
-                )
+                predecessor[v] = (u, edge.key, edge.length)
 
                 estimated_total = tentative_g + heuristic(v)
 

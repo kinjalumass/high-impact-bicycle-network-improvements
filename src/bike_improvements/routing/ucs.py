@@ -77,11 +77,7 @@ def ucs_shortest_path(
 
             if new_cost < distances.get(v, math.inf):
                 distances[v] = new_cost
-                predecessor[v] = (
-                    u,
-                    edge.key,
-                    edge.length,
-                )
+                predecessor[v] = (u, edge.key, edge.length)
 
                 heappush(
                     heap,

@@ -20,30 +20,17 @@ def candidate_rows(
     ids = list(candidate_ids)
 
     if not ids:
-        raise ValueError(
-            "At least one candidate is required."
-        )
+        raise ValueError("At least one candidate is required.")
 
     if len(ids) != len(set(ids)):
-        raise ValueError(
-            "Candidate IDs must be unique."
-        )
+        raise ValueError("Candidate IDs must be unique.")
 
-    indexed = candidates.set_index(
-        "candidate_id",
-        drop=False,
-    )
+    indexed = candidates.set_index("candidate_id", drop=False)
 
-    missing = [
-        candidate_id
-        for candidate_id in ids
-        if candidate_id not in indexed.index
-    ]
+    missing = [candidate_id for candidate_id in ids if candidate_id not in indexed.index]
 
     if missing:
-        raise ValueError(
-            f"Unknown candidate IDs: {missing}"
-        )
+        raise ValueError(f"Unknown candidate IDs: {missing}")
 
     return indexed.loc[ids].copy()
 
@@ -74,12 +61,9 @@ def apply_candidate_set(
 
         records.append(
             {
-                "candidate_id":
-                    candidate["candidate_id"],
-                "length_m":
-                    float(candidate["length_m"]),
-                "modified_directed_edges":
-                    len(modified),
+                "candidate_id": candidate["candidate_id"],
+                "length_m": float(candidate["length_m"]),
+                "modified_directed_edges": len(modified),
             }
         )
 
@@ -96,14 +80,11 @@ def package_metadata(
         candidate_ids,
     )
 
-    ids = rows[
-        "candidate_id"
-    ].astype(str).tolist()
+    ids = rows["candidate_id"].astype(str).tolist()
 
     return {
         "combination_id": "+".join(ids),
         "candidate_ids": ";".join(ids),
         "project_count": len(ids),
-        "cumulative_length_m":
-            float(rows["length_m"].sum()),
+        "cumulative_length_m": float(rows["length_m"].sum()),
     }
